@@ -1,0 +1,5 @@
+add_subdirectory(airifa)
+add_subdirectory(dbdky)
+add_subdirectory(ecom)
+add_subdirectory(shiyou)
+add_subdirectory(zhongfen)
