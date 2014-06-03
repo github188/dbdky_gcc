@@ -23,7 +23,6 @@ public:
 	void clearBuffer();
     
 private:
-	boost::shared_ptr<Parser> parser;
 	boost::shared_ptr<DataQueue> inBuffer;
 	int fd;
 };
