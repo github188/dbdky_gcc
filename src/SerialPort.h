@@ -5,7 +5,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include "DataQueue.h"
-#include "Parser.h"
 
 
 namespace dbdky

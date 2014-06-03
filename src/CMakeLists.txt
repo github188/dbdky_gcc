@@ -1,7 +1,7 @@
 add_subdirectory(utils)
 add_subdirectory(port)
 add_subdirectory(dbhelper)
-
+add_subdirectory(protocols)
 
 set(confUtil_SRCS
     ConfigUtil.cpp
@@ -15,7 +15,6 @@ install(TARGETS confutil DESTINATION lib)
 set(com_service_SRCS
   com_service.cpp
   DataQueue.cpp
-  Parser.cpp
   SerialPort.cpp
   com_main.cpp
   )
