@@ -10,10 +10,10 @@ BUILD_NO_EXAMPLES=${BUILD_NO_EXAMPLES:-0}
 DAT_DIR=${SOURCE_DIR}/dat
 SOURCE_TOP_DIR=${SOURCE_DIR}
 
-cd $SOURCE_TOP_DIR
-cd src/ws/test \
-  && wsdl2h -o CAGAccessService.h CAGAccessService.wsdl \
-  && soapcpp2 -i -I../gsoap_inc/import CAGAccessService.h
+# cd $SOURCE_TOP_DIR
+# cd src/ws/test \
+#   && wsdl2h -o CAGAccessService.h CAGAccessService.wsdl \
+#   && soapcpp2 -i -I../gsoap_inc/import CAGAccessService.h
 
 cd $SOURCE_TOP_DIR
 
