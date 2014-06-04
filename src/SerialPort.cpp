@@ -88,7 +88,7 @@ int SerialPort::init()
     opt.c_oflag &= ~(ONLCR | OCRNL);
 
     opt.c_iflag &= ~(ICRNL | INLCR);
-    opt.c_ifalg &= ~(IXON | IXOFF | IXANY);
+    opt.c_iflag &= ~(IXON | IXOFF | IXANY);
 
     opt.c_cc[VTIME] = 0;
     opt.c_cc[VMIN] = 0;
