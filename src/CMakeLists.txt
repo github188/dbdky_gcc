@@ -17,6 +17,7 @@ set(com_service_SRCS
   DataQueue.cpp
   SerialPort.cpp
   com_main.cpp
+  pdu.cpp
   )
 
 add_executable(dbdky_gcc ${com_service_SRCS})

@@ -3,9 +3,9 @@
 
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
+#include <string>
 
-#include "DataQueue.h"
-
+using std::string;
 
 namespace dbdky
 {
@@ -14,7 +14,7 @@ namespace gcc
 class SerialPort : boost::noncopyable
 {
 public:
-	SerialPort();
+	SerialPort(string& devicename);
 	void start();
 	void stop();
 	void release();
@@ -23,8 +23,9 @@ public:
 	void clearBuffer();
     
 private:
-	boost::shared_ptr<DataQueue> inBuffer;
-	int fd;
+        int init();
+	int fd_;
+        string devicename_;
 };
 }
 }
