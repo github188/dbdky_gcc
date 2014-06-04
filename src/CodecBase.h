@@ -8,10 +8,11 @@ namespace gcc
 {
 class CodecBase
 {
-
+// 	CodecBase(mape<>);
+// parser(vuffer) = 0;
+// encaps();
 };
 }
 }
-
 
 #endif    //__CODECBASE_H_

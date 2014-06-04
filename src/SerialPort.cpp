@@ -113,6 +113,26 @@ void SerialPort::release()
 void SerialPort::onQueryDataTimer()
 {
     LOG_INFO << "onQueryDataTimer";
+    //TODO:
+    // <TimerID, <ID, type>>,
+
+    // tmpType = getTypeFromTimerID();
+    // codec = CodecFactory->getInstance()->getCodec()
+    // char* cmd = codec->makeQueryCmd();
+    // //Busy wait.
+    // //Timeout
+
+    // ::write(fd_, cmd, len);
+
+    // ::read(fd_, )
+    // Buffer buf;
+
+    // bool stru, codec->parse(buf->peek())
+
+    // call yumiao's interface
+
+    // runInThread()
+
 }
 
 int SerialPort::init()
