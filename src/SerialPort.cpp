@@ -1,5 +1,7 @@
 #include "SerialPort.h"
 
+#include <boost/bind.hpp>
+
 #include <utils/Logging.h>
 
 #include <unistd.h>
@@ -15,10 +17,16 @@
 using namespace dbdky;
 using namespace dbdky::gcc;
 
-SerialPort::SerialPort(string& devicename)
+SerialPort::SerialPort(EventLoop *loop, string devicename, uint16_t queryInterval, pdu::ProtocolType type)
     : devicename_(devicename),
+      loop_(loop),
+      queryInterval_(queryInterval),
+      threadPool_(new ThreadPool("thread" + devicename)),
+      started_(false),
+      pType_(type),
       fd_(-1)
 {
+    threadPool_->setMaxQueueSize(6);
 }
 
 SerialPort::~SerialPort()
@@ -28,13 +36,29 @@ SerialPort::~SerialPort()
 
 void SerialPort::start()
 {
+    if (started_)
+    {
+        LOG_INFO << "Already started";
+        return;
+    }
+
     if (-1 == init())
     {
         LOG_ERROR << "Fail to init serial:" << devicename_;
         return;
     }
 
-#if 1
+    LOG_INFO << "Init Serial Port: " << devicename_ << "->OK";
+
+    started_ = true;
+    threadPool_->start(2);
+    queryDataTimer_ = loop_->runEvery(queryInterval_,
+        boost::bind(&SerialPort::onQueryDataTimer, this));
+
+    threadPool_->run(boost::bind(&SerialPort::listen, this));
+
+    
+#if 0
     char read_buf[4096];
     int n;
     //Buffer buf;
@@ -53,6 +77,25 @@ void SerialPort::start()
 #endif
 }
 
+void SerialPort::listen()
+{
+    char read_buf[4096];
+    int n;
+    bzero(read_buf, sizeof(read_buf));
+
+    while(1)
+    {
+        n = ::read(fd_, read_buf, sizeof(read_buf));
+        if (n > 0)
+        {
+            LOG_INFO << "Receive " << n << " bytes data";
+        }
+
+        n = 0;
+        bzero(read_buf, sizeof(read_buf));
+    }
+}
+
 void SerialPort::stop()
 {
 
@@ -65,6 +108,11 @@ void SerialPort::release()
         ::close(fd_);
         fd_ = -1;
     }
+}
+
+void SerialPort::onQueryDataTimer()
+{
+    LOG_INFO << "onQueryDataTimer";
 }
 
 int SerialPort::init()

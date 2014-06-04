@@ -16,11 +16,9 @@ namespace gcc
 	com_service::com_service(EventLoop* loop,
 		const string& name)
 	: loop_(loop),
-	  name_(name),
-	  threadPool_(new EventLoopThreadPool(loop))
+	  name_(name)
 	{
-        threadPool_->setThreadNum(10);
-        threadPool_->start();
+
 	}
 
 	com_service::~com_service()
@@ -30,7 +28,8 @@ namespace gcc
 
 	void com_service::start()
 	{
-
+		SerialPort port(loop_, "/dev/pts/14");
+		port.start();
 	}
 
 	void com_service::stop()

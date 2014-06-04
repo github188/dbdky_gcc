@@ -12,7 +12,9 @@
 #include <utils/Timestamp.h>
 
 #include <port/EventLoop.h>
-#include <port/EventLoopThreadPool.h>
+//#include <port/EventLoopThreadPool.h>
+
+#include "SerialPort.h"
 
 #include <string>
 
@@ -40,7 +42,7 @@ private:
 
 	const string name_;
 
-	boost::scoped_ptr<EventLoopThreadPool> threadPool_;
+	//boost::scoped_ptr<EventLoopThreadPool> threadPool_;
 };
 }
 }

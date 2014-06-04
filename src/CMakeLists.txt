@@ -18,6 +18,7 @@ set(com_service_SRCS
   SerialPort.cpp
   com_main.cpp
   pdu.cpp
+  CodecFactory.cpp
   )
 
 add_executable(dbdky_gcc ${com_service_SRCS})
