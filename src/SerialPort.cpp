@@ -35,6 +35,21 @@ void SerialPort::start()
     }
 
 #if 1
+    char read_buf[4096];
+    int n;
+    //Buffer buf;
+    bzero(read_buf, sizeof(read_buf));
+    while (1)
+    {
+        n = ::read(fd_, read_buf, sizeof(read_buf));
+        if (n > 0)
+        {
+            //buf.append(read_buf, n);
+            LOG_INFO << "Receive " << n << " bytes data";
+        }
+        n = 0;
+        bzero(read_buf, sizeof(read_buf));
+    }
 #endif
 }
 
@@ -45,7 +60,11 @@ void SerialPort::stop()
 
 void SerialPort::release()
 {
-
+    if (fd_ != -1)
+    {
+        ::close(fd_);
+        fd_ = -1;
+    }
 }
 
 int SerialPort::init()
