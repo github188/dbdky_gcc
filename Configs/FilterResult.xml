@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="gbk" ?>
+<MonitorUnit name="MU1" interval="20000" protocolname="HDSF6" port="RS485A" manufacturer="neri" cycleid="1307064995" mac="0x01" ytime="1">
+    <MeasurePoint deviceid="HGIS0002" id="SIMG2" checktime="2011年6月3日9时36分37秒">
+        <param name="Tmp" desc="SF6气体温度" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="">0.000000</param>
+        <param name="Pres" desc="SF6气体压力" unit="" precision="0.0001" range="" filter="" addresslen="" address="" registernum="">-0.000000</param>
+        <param name="Den" desc="SF6气体密度" unit="" precision="0.0001" range="" filter="" addresslen="" address="" registernum="">0.803241</param>
+        <param name="H2O" desc="SF6气体微水含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="">24.400000</param>
+        <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="">3.897851</param>
+    </MeasurePoint>
+</MonitorUnit>

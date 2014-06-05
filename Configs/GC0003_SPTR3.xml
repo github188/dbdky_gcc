@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gbk" ?>
+<package>
+   <RS485 name="RS485A" desc="RS485串行总线">
+    <PortName>COM1</PortName>
+    <BaudRate>9600</BaudRate>
+    <DataBits>8</DataBits>
+    <StopBits>1</StopBits>
+    <Parity>0</Parity>
+    <TotalTimeOut>1000</TotalTimeOut>
+    <IntervalTimeOut>200</IntervalTimeOut>
+    <InBufferSize>1024</InBufferSize>
+    <OutBufferSize>1024</OutBufferSize>
+  </RS485>
+<MonitorUnit name="MU1" interval="60000" protocolname="modbus" port="RS485A" manufacturer="neri" cycleid="" mac="0x05" ytime="1">
+     <MeasurePoint  deviceid="GC0003" IEDName="SY_UDM501_C_6" id="MMXN3" checktime="">
+  		  <param name="SmpTm" />
+     	  <param name="Amp" />
+     </MeasurePoint>
+</MonitorUnit>
+</package>

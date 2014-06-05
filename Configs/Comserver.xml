@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gbk" ?>
+<Comservers>
+  <Comserver name="modbus" factory="东北电力科学研究院" />   
+  <Comserver name="微水密度" factory="东北电力科学研究院" />
+  <Comserver name="LAmodbus" factory="东北电力科学研究院" />
+  <Comserver name="HDSF6" factory="东北电力科学研究院" />
+  <Comserver name="OMAS" factory="东北电力科学研究院" />
+  <Comserver name="VAISALA" factory="东北电力科学研究院" /> 
+</Comservers>

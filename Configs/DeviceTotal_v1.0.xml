@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="gbk" ?>
+<DataConfig>
+<Substation name="长春南变电站" id ="变电站编号">
+  <Device name="变压器" desc="1号主变压器" id="TFM0001" type="TFM">  
+  	 <MeasurePoint name="pd1" desc="局部放电"  type="PD" >
+  	 	  <param name="DCmax" desc="最大放电量" unit="pC" precision="" range="300~10000" filter="" addresslen="" address="" />
+  	 	  <param name="DCitvlcnt" desc="单位时间放电次数" unit="" precision="" range="300~10000" filter="" addresslen="" address="" />
+  	 	  <param name="DCP" desc="放电相位" unit="度" precision="" range="0~360" filter="" addresslen="" address="" />
+     </MeasurePoint> 
+     <MeasurePoint name="dga1" desc="油中溶解气体含量"  type="DGA">
+     	  <param name="H2" desc="绝缘油中氢气含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="绝缘油中水分含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CH4" desc="绝缘油中甲烷含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H6" desc="绝缘油中乙烷含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H4" desc="绝缘油中乙烯含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H2" desc="绝缘油中乙炔含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="O2" desc="绝缘油中氧气含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CO" desc="绝缘油中一氧化碳含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CO2" desc="绝缘油中二氧化碳含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+     <MeasurePoint name="gas1" desc="轻瓦斯气体含量"  type="GAS">
+     	  <param name="OGC" desc="轻瓦斯测量的绝缘油产气量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+     <MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
+     	  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+     <MeasurePoint name="ife1" desc="铁心接地测量"  type="IFE" >
+     	  <param name="Ti" desc="监测时间" unit="" precision="1" range="" filter="" addresslen="" address="" registernum="" />     
+     	  <param name="Ie" desc="铁心接地电流" unit="" precision="1" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+     <MeasurePoint name="tp1" desc="绕组、绝缘油的温度"  type="TP" >
+     	  <param name="TOT1" desc="顶层油温1" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="TOT2" desc="顶层油温2" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="TOB1" desc="底层油温1" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="TOB2" desc="底层油温2" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="TW1" desc="绕组温度1" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="TW2" desc="绕组温度2" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />     	  
+     </MeasurePoint>
+     <MeasurePoint name="ol1" desc="绝缘油的油位"  type="OL">
+     	  <param name="OLP" desc="绝缘油油位" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />    
+     </MeasurePoint>    	
+  </Device>
+  <Device name="断路器" desc="1号主断路器" id="CB0001" type="CB"> 
+  	<MeasurePoint name="mp1" desc="断路器机构的机械特性"  type="MP">
+  		  <param name="MS" desc="断路器机构行程" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OS" desc="断路器分闸速度" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="CS" desc="断路器合闸速度" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="CT" desc="电机储能时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="CI" desc="电机储能电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OCI" desc="分闸线圈电流波形" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="CCI" desc="合闸线圈电流波形" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OT" desc="分闸时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="CT" desc="合闸时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>  	
+  </Device>
+  <Device name="避雷器" desc="1号" id="MOA0001" type="MOA">
+  	<MeasurePoint name="ZSAR1" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />   
+    </MeasurePoint>
+  </Device>
+  <Device name="避雷器" desc="2号" id="MOA0002" type="MOA">
+  	<MeasurePoint name="ZSAR2" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  /> 	       	       	  
+    </MeasurePoint>
+  </Device>
+    <Device name="避雷器" desc="3号" id="MOA0003" type="MOA">
+  	<MeasurePoint name="ZSAR3" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />        	       	  
+    </MeasurePoint>
+  </Device>
+   <Device name="避雷器" desc="4号" id="MOA0004" type="MOA">
+  	<MeasurePoint name="ZSAR4" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />        	       	  
+    </MeasurePoint>
+  </Device> 
+     <Device name="避雷器" desc="5号" id="MOA0005" type="MOA">
+  	<MeasurePoint name="ZSAR5" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />  	       	       	  
+    </MeasurePoint>
+  </Device>
+  <Device name="避雷器" desc="6号" id="MOA0006" type="MOA">
+  	<MeasurePoint name="ZSAR6" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />  	       	       	  
+    </MeasurePoint>
+  </Device>
+     <Device name="避雷器" desc="7号" id="MOA0007" type="MOA">
+  	<MeasurePoint name="ZSAR7" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  /> 	       	       	  
+    </MeasurePoint>
+  </Device>
+     <Device name="避雷器" desc="8号" id="MOA0008" type="MOA">
+  	<MeasurePoint name="ZSAR8" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />  	       	       	  
+    </MeasurePoint>
+  </Device>
+     <Device name="避雷器" desc="9号" id="MOA0009" type="MOA">
+  	<MeasurePoint name="ZSAR9" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />   	       	       	  
+    </MeasurePoint>
+  </Device>
+     <Device name="避雷器" desc="10号" id="MOA0010" type="MOA">
+  	<MeasurePoint name="ZSAR10" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />    	       	       	  
+    </MeasurePoint>
+  </Device>
+     <Device name="避雷器" desc="11号" id="MOA0011" type="MOA">
+  	<MeasurePoint name="ZSAR11" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />   	       	       	  
+    </MeasurePoint>
+  </Device>   
+  <Device name="避雷器" desc="12号" id="MOA0012" type="MOA">
+  	<MeasurePoint name="ZSAR12" desc="容性设备的绝缘测量" type="CP">
+  		  <param name="SmpTm" desc="实时时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="TotA" desc="全电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" /> 	
+  		  <param name="RisA" desc="阻性电流" unit="" precision="0.01" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="OpCnt" desc="动作次数" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="LastOpTm" desc="动作时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+  		   <param name="Alrm" desc="报警标志位" unit="" precision="" range="" filter="" addresslen="" address="" registernum=""  />   	       	       	  
+    </MeasurePoint>
+  </Device> 
+  <Device name="铁芯接地电流测量" desc="1号" id="GC0001" type="SPTR">
+  	<MeasurePoint name="MMXN1" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+  <Device name="铁芯接地电流测量" desc="2号" id="GC0002" type="SPTR">
+  	<MeasurePoint name="MMXN2" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+  <Device name="铁芯接地电流测量" desc="3号" id="GC0003" type="SPTR">
+  	<MeasurePoint name="MMXN3" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>
+  </Device>
+  <Device name="铁芯接地电流测量" desc="4号" id="GC0004" type="SPTR">
+  	<MeasurePoint name="MMXN4" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+  <Device name="铁芯接地电流测量" desc="5号" id="GC0005" type="SPTR">
+  	<MeasurePoint name="MMXN5" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+    <Device name="铁芯接地电流测量" desc="6号" id="GC0006" type="SPTR">
+  	<MeasurePoint name="MMXN6" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+  <Device name="电流互感器" desc="1号主电流互感器" id="CT0001" type="CT">
+  	<MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>  	
+  </Device>
+  <Device name="电容式电压互感器" desc="1号主电容式电压互感器" id="CVT0001" type="CVT">
+  	<MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>   	
+  </Device>
+  <Device name="OMAS" desc="容性设备" id="OMAS01" type="OMA">
+  	<MeasurePoint name="ZCAP1" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="0.168858261" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="0.002144922" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="0.168858261" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="0.002144922" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="0.168858261" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="0.002144922" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="0.0127" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="0.0127" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="0.0127" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>   	
+  </Device>
+   <Device name="OMAS" desc="容性设备" id="OMAS02" type="OMA">
+  	<MeasurePoint name="ZCAP2" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="0.112627793" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="0.000629488" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="0.112627793" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="0.000629488" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="0.112627793" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.00E-03" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="0.000629488" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="0.00559" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="0.00559" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="0.00559" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS03" type="OMA">
+  	<MeasurePoint name="ZCAP3" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS04" type="OMA">
+  	<MeasurePoint name="ZCAP4" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS05" type="OMA">
+  	<MeasurePoint name="ZCAP5" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS06" type="OMA">
+  	<MeasurePoint name="ZCAP6" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS07" type="OMA">
+  	<MeasurePoint name="ZCAP7" desc="容性设备的绝缘测量"  type="OMA">
+  		 <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+   <Device name="OMAS" desc="容性设备" id="OMAS08" type="OMA">
+  	<MeasurePoint name="ZCAP8" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>   	
+  </Device>
+   <Device name="OMAS" desc="容性设备" id="OMAS09" type="OMA">
+  	<MeasurePoint name="ZCAP9" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS10" type="OMA">
+  	<MeasurePoint name="ZCAP10" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS11" type="OMA">
+  	<MeasurePoint name="ZCAP11" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS12" type="OMA">
+  	<MeasurePoint name="ZCAP12" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS13" type="OMA">
+  	<MeasurePoint name="ZCAP13" desc="容性设备的绝缘测量"  type="OMA">
+  		 <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    </Device>
+    <Device name="OMAS" desc="容性设备" id="OMAS14" type="OMA">
+  	<MeasurePoint name="ZCAP14" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+      <Device name="OMAS" desc="容性设备" id="OMAS15" type="OMA">
+  	<MeasurePoint name="ZCAP15" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+      <Device name="OMAS" desc="容性设备" id="OMAS16" type="OMA">
+  	<MeasurePoint name="ZCAP16" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+      <Device name="OMAS" desc="容性设备" id="OMAS17" type="OMA">
+  	<MeasurePoint name="ZCAP17" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+      <Device name="OMAS" desc="容性设备" id="OMAS18" type="OMA">
+  	<MeasurePoint name="ZCAP18" desc="容性设备的绝缘测量"  type="OMA">
+  		 <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+  <Device name="OMAS" desc="容性设备" id="OMAS19" type="OMA">
+  	<MeasurePoint name="ZCAP19" desc="容性设备的绝缘测量"  type="OMA">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Time" desc="采样时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_1C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_1C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_1C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2A" desc="A相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2A" desc="A相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2A" desc="A相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2B" desc="B相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2B" desc="B相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2B" desc="B相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C_2C" desc="C相绝缘介质电容量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="Tg_2C" desc="C相绝缘介质的损耗角正切" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="Ik_2C" desc="C相绝缘介质的泄漏电流" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_A" desc="A相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+  		  <param name="PT_B" desc="B相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+		  <param name="PT_C" desc="C相电压" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint> 
+  </Device>
+  <Device name="电抗器" desc="1号主电抗器" id="RA0001" type="RA">
+  	<MeasurePoint name="dga1" desc="油中溶解气体含量"  type="DGA">
+  	  	<param name="H2" desc="绝缘油中氢气含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="绝缘油中水分含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CH4" desc="绝缘油中甲烷含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H6" desc="绝缘油中乙烷含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H4" desc="绝缘油中乙烯含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="C2H2" desc="绝缘油中乙炔含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="O2" desc="绝缘油中氧气含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CO" desc="绝缘油中一氧化碳含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="CO2" desc="绝缘油中二氧化碳含量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    <MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
+    	  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    <MeasurePoint name="ife1" desc="铁心接地测量"  type="IFE">
+    	  <param name="Ie" desc="铁心接地电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>
+    <MeasurePoint name="ol1" desc="绝缘油的油位"  type="OL">
+    	  <param name="OLP" desc="绝缘油油位" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>    	
+  </Device>
+  <Device name="耦合电容器" desc="1号主耦合电容器" id="CC0001" type="CC">
+  	<MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
+  		  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Tg" desc="绝缘介质的损耗角正切" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Ik" desc="绝缘介质的泄漏电流" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+    </MeasurePoint>  	
+  </Device>
+  <Device name="1#长春南变HGIS气室" desc="1号主HGIS" id="HGIS0001" type="HGIS">
+     <MeasurePoint name="SIMG1" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+  </Device>
+  <Device name="2#长春南变HGIS气室" desc="2号主HGIS" id="HGIS0002" type="HGIS">
+     <MeasurePoint name="SIMG2" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+      </Device>
+  <Device name="3#长春南变HGIS气室" desc="3号主HGIS" id="HGIS0003" type="HGIS">
+     <MeasurePoint name="SIMG3" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+   </Device>
+   <Device name="4#长春南变HGIS气室" desc="4号主HGIS" id="HGIS0004" type="HGIS">
+     <MeasurePoint name="SIMG4" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+   </Device>
+   <Device name="5#长春南变HGIS气室" desc="5号主HGIS" id="HGIS0005" type="HGIS">
+      <MeasurePoint name="SIMG5" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+   </Device>
+   <Device name="6#长春南变HGIS气室" desc="6号主HGIS" id="HGIS0006" type="HGIS">
+     <MeasurePoint name="SIMG6" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+   </Device>
+   <Device name="7#长春南变HGIS气室" desc="7号主HGIS" id="HGIS0007" type="HGIS">
+     <MeasurePoint name="SIMG7" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+    </Device>
+   <Device name="8#长春南变HGIS气室" desc="8号主HGIS" id="HGIS0008" type="HGIS">
+     <MeasurePoint name="SIMG8" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint> 
+   </Device>
+   <Device name="9#长春南变HGIS气室" desc="9号主HGIS" id="HGIS0009" type="HGIS">
+     <MeasurePoint name="SIMG9" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>  
+   </Device>
+   <Device name="10#长春南变HGIS气室" desc="10号主HGIS" id="HGIS0010" type="HGIS">
+          <MeasurePoint name="SIMG10" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+    </Device>
+    <Device name="11#长春南变HGIS气室" desc="11号主HGIS" id="HGIS0011" type="HGIS">
+     <MeasurePoint name="SIMG11" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>    
+     </Device>
+   <Device name="12#长春南变HGIS气室" desc="12号主HGIS" id="HGIS0012" type="HGIS">
+     <MeasurePoint name="SIMG12" desc="密度微水遥测数据"  type="SIMG">
+     	  <param name="TmpSF6" desc="SF6气体温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Pres" desc="SF6气体压力" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Den" desc="SF6气体密度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="H2O" desc="SF6气体微水含量" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Dewp" desc="SF6气体露点" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+    </Device>
+    <Device name="VAISALA环境温湿度测量1#设备" desc="VAISALA" id="VAISALA01" type="VAISALA">
+     <MeasurePoint name="MMET1" desc="温湿度测量"  type="VASALA">
+     	  <param name="EnvTmp" desc="环境温度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="EnvHum" desc="环境湿度" unit="" precision="1.0" range="" filter="" addresslen="" address="" registernum="" />
+     </MeasurePoint>
+    </Device>
+</Substation>
+<Filters>
+  <Filter name="filter1" >
+     <MaxValue>200</MaxValue>
+     <MinValue>0</MinValue>
+     <AvgPoints>50</AvgPoints>
+     <AvgDirection>forward</AvgDirection>
+  </Filter>   
+  <Filter name="filter2" >
+     <MaxValue>1000</MaxValue>
+     <MinValue>0</MinValue>
+     <AvgPoints>20</AvgPoints>
+     <AvgDirection>backward</AvgDirection>
+  </Filter>         
+</Filters>
+</DataConfig>

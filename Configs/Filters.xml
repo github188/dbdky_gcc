@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Filters>
+  <Filter name="filter1" type="threshold" >
+        <MaxValue>200</MaxValue>
+        <MinValue>0</MinValue>
+        <AvgPoints>50</AvgPoints>
+  </Filter>  
+  <Filter name="filter2" type="parse" >
+      <formula>x^2*5</formula>
+      <MaxValue>200</MaxValue>
+      <MinValue>0</MinValue>
+      <AvgPoints>50</AvgPoints>
+  </Filter>         
+</Filters>
