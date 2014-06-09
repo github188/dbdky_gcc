@@ -7,6 +7,11 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
+#include "SerialPort.h"
+#include "MeasurePoint.h"
+#include "MeasureUnit.h"
+#include "param.h"
+
 using namespace std;
 
 namespace dbdky

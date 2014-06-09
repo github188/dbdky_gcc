@@ -198,3 +198,14 @@ _fail:
     return -1;
 }
 
+
+ void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, string mac, 
+        string manufacturer="", string cycleid="", string ytime="");
+{
+
+}
+
+bool SerialPort::getMonitorUnitByName(string name, MonitorUnit& unit)
+{
+    return false;
+}

@@ -2,7 +2,7 @@
 #define __MEASUREPOINT_H_
 
 #include <string>
-#include <map>
+#include <list>
 
 #include "param.h"
 
@@ -19,7 +19,7 @@ private:
 	string IEDName_;
 	string id_;
 	string checktime_;
-	list<Param> paramList_;
+	map<string, Param> paramList_;
 };
 }
 }

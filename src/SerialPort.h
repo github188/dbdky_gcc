@@ -6,6 +6,7 @@
 #include <boost/function.hpp>
 
 #include <string>
+#include <map>
 
 
 #include <port/EventLoop.h>
@@ -14,9 +15,10 @@
 
 #include <pdu.h>
 
+#include <MonitorUnit.h>
 
 
-using std::string;
+using namespace std;
 using namespace dbdky;
 using namespace dbdky::port;
 
@@ -37,6 +39,11 @@ public:
 
 	virtual ~SerialPort();
 	void clearBuffer();
+
+    void insertMonitorUnit(string name, string interval, string protocolname, string mac, 
+        string manufacturer="", string cycleid="", string ytime="");
+
+    bool getMonitorUnitByName(string name, MonitorUnit& unit);
     
 private:
     int init();
@@ -51,6 +58,8 @@ private:
     void onQueryDataTimer();
     bool started_;
     pdu::ProtocolType pType_;
+
+    map<string, MonitorUnit> monitorUnitList_;
 };
 }
 }
