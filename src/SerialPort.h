@@ -29,8 +29,10 @@ namespace gcc
 class SerialPort : boost::noncopyable
 {
 public:
-	SerialPort(EventLoop* loop, string devicename, uint16_t queryInterval = 5, 
-		pdu::ProtocolType type=pdu::kUnknown);
+	//SerialPort(EventLoop* loop, string devicename, uint16_t queryInterval = 5, 
+//		pdu::ProtocolType type=pdu::kUnknown);
+    SerialPort(EventLoop* loop, string name, string portname, string baudrate="9600",
+        string databits="8", string stopbits="1");
 	void start();
 	void stop();
 	void release();
@@ -49,15 +51,16 @@ private:
     int init();
 
 	int fd_;
+    string name_;
     string devicename_;
     EventLoop* loop_;
     boost::scoped_ptr<ThreadPool> threadPool_;
 
     TimerId queryDataTimer_;
-    uint16_t queryInterval_;
+    //uint16_t queryInterval_;
     void onQueryDataTimer();
     bool started_;
-    pdu::ProtocolType pType_;
+    //pdu::ProtocolType pType_;
 
     map<string, MonitorUnit> monitorUnitList_;
 };

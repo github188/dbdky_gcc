@@ -17,13 +17,13 @@
 using namespace dbdky;
 using namespace dbdky::gcc;
 
-SerialPort::SerialPort(EventLoop *loop, string devicename, uint16_t queryInterval, pdu::ProtocolType type)
-    : devicename_(devicename),
+SerialPort::SerialPort(EventLoop* loop, string name, string portname, string baudrate,
+        string databits, string stopbits)
+    : name_(name),
+      devicename_(portname),
       loop_(loop),
-      queryInterval_(queryInterval),
-      threadPool_(new ThreadPool("thread" + devicename)),
+      threadPool_(new ThreadPool("thread" + name)),
       started_(false),
-      pType_(type),
       fd_(-1)
 {
     threadPool_->setMaxQueueSize(6);
@@ -52,8 +52,8 @@ void SerialPort::start()
 
     started_ = true;
     threadPool_->start(2);
-    queryDataTimer_ = loop_->runEvery(queryInterval_,
-        boost::bind(&SerialPort::onQueryDataTimer, this));
+    // queryDataTimer_ = loop_->runEvery(queryInterval_,
+    //     boost::bind(&SerialPort::onQueryDataTimer, this));
 
     threadPool_->run(boost::bind(&SerialPort::listen, this));
 
@@ -199,8 +199,8 @@ _fail:
 }
 
 
- void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, string mac, 
-        string manufacturer="", string cycleid="", string ytime="");
+void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, 
+    string mac, string manufacturer, string cycleid, string ytime)
 {
 
 }
