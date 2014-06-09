@@ -8,6 +8,11 @@
 #include <utils/Logging.h>
 #include <utils/Timestamp.h>
 
+#include <vector>
+
+#include "DeviceManager.h"
+
+using namespace std;
 
 namespace dbdky
 {
@@ -28,8 +33,15 @@ namespace gcc
 
 	void com_service::start()
 	{
-		SerialPort port(loop_, "/dev/pts/14");
-		port.start();
+		vector<string> files = DeviceManager::getInstance()->getFiles();
+		LOG_INFO << files.size();
+		vector<string>::const_iterator itr;
+		for (itr = files.begin(); itr != files.end(); itr++)
+		{
+			LOG_INFO << "File: " << *itr;
+		}
+		// SerialPort port(loop_, "/dev/pts/14");
+		// port.start();
 	}
 
 	void com_service::stop()
