@@ -205,7 +205,7 @@ void SerialPort::insertMonitorUnit(string name, string interval, string protocol
 
 }
 
-bool SerialPort::getMonitorUnitByName(string name, MonitorUnit& unit)
+MonitorUnit* SerialPort::getMonitorUnitByName(string name)
 {
-    return false;
+    return NULL;
 }

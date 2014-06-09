@@ -52,6 +52,7 @@ private:
     void getConfigFileListByPath();
 
     vector<string> configfiles_;
+
 };
 }	
 }

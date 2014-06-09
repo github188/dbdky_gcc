@@ -45,7 +45,7 @@ public:
     void insertMonitorUnit(string name, string interval, string protocolname, string mac, 
         string manufacturer="", string cycleid="", string ytime="");
 
-    bool getMonitorUnitByName(string name, MonitorUnit& unit);
+    MonitorUnit* getMonitorUnitByName(string name);
     
 private:
     int init();
@@ -62,7 +62,7 @@ private:
     bool started_;
     //pdu::ProtocolType pType_;
 
-    map<string, MonitorUnit> monitorUnitList_;
+    map<string, boost::shared_ptr<MonitorUnit> > monitorUnitList_;
 };
 }
 }
