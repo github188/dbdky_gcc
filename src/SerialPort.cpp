@@ -14,9 +14,10 @@
 #include <termios.h>
 #include <errno.h>
 
-using namespace dbdky;
-using namespace dbdky::gcc;
-
+namespace dbdky
+{
+namespace gcc
+{
 SerialPort::SerialPort(EventLoop* loop, string name, string portname, string baudrate,
         string databits, string stopbits)
     : name_(name),
@@ -199,13 +200,35 @@ _fail:
 }
 
 
-void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, 
+void SerialPort::insertMonitorUnit(string name, int interval, string protocolname, 
     string mac, string manufacturer, string cycleid, string ytime)
 {
+    if (name.empty())
+    {
+        return;
+    }
+
+    //TODO:
+
 
 }
 
 MonitorUnit* SerialPort::getMonitorUnitByName(string name)
 {
+    if (name.empty())
+    {
+        return NULL;
+    }
+
+    map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+    itr = monitorUnitList_.find(name);
+    if (monitorUnitList_.end() != itr)
+    {
+        return itr->second.get();
+    }
+    
     return NULL;
+}
+
+}
 }

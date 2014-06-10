@@ -20,6 +20,8 @@ set(com_service_SRCS
   pdu.cpp
   CodecFactory.cpp
   DeviceManager.cpp
+  MonitorUnit.cpp
+  MeasurePoint.cpp
   )
 
 add_executable(dbdky_gcc ${com_service_SRCS})

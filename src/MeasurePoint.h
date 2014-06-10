@@ -2,7 +2,7 @@
 #define __MEASUREPOINT_H_
 
 #include <string>
-#include <list>
+#include <map>
 
 #include "param.h"
 
@@ -14,6 +14,9 @@ namespace gcc
 {
 class MeasurePoint
 {
+public:
+	MeasurePoint(string deviceid, string IEDName, string id, string checktime);
+	~MeasurePoint();
 private:
 	string deviceid_;
 	string IEDName_;

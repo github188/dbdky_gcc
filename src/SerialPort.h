@@ -42,7 +42,7 @@ public:
 	virtual ~SerialPort();
 	void clearBuffer();
 
-    void insertMonitorUnit(string name, string interval, string protocolname, string mac, 
+    void insertMonitorUnit(string name, int interval, string protocolname, string mac, 
         string manufacturer="", string cycleid="", string ytime="");
 
     MonitorUnit* getMonitorUnitByName(string name);
