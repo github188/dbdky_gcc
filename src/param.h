@@ -11,6 +11,27 @@ namespace gcc
 {
 class Param
 {
+public:
+	Param(string name, string desc="", string unit="", string precision="", 
+		string range="", string filter="",
+		string addresslen="", string address="", string registernum="")
+	  : name_(name),
+	    desc_(desc),
+	    unit_(unit),
+	    precision_(precision),
+	    range_(range),
+	    filter_(filter),
+	    addresslen_(addresslen),
+	    address_(address),
+	    registernum_(registernum)
+	    {
+
+	    }
+
+	~Param()
+	{
+
+	}
 private:
 	string name_;
 	string desc_;

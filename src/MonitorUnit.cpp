@@ -52,7 +52,7 @@ namespace gcc
 		{
 			return NULL;
 		}
-		
+
         map<string, boost::shared_ptr<MeasurePoint> >::const_iterator itr;
         itr = measurePointList_.find(deviceid);
         if (measurePointList_.end() != itr)

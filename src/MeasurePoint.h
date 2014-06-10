@@ -3,10 +3,13 @@
 
 #include <string>
 #include <map>
+#include <boost/shared_ptr.hpp>
 
 #include "param.h"
 
 using namespace std;
+
+class MonitorUnit;
 
 namespace dbdky
 {
@@ -17,12 +20,18 @@ class MeasurePoint
 public:
 	MeasurePoint(string deviceid, string IEDName, string id, string checktime);
 	~MeasurePoint();
+
+	Param* getParamByName(string name);
+	void insertParam(string name, string desc="", string unit="", string precision="", 
+		string range="", string filter="",
+		string addresslen="", string address="", string registernum="");
 private:
 	string deviceid_;
 	string IEDName_;
 	string id_;
 	string checktime_;
-	map<string, Param> paramList_;
+	map<string, boost::shared_ptr<Param> > paramList_;
+
 };
 }
 }
