@@ -32,7 +32,7 @@ namespace gcc
 	DeviceManager::DeviceManager(EventLoop* loop, string deviceTotalName, string deviceConfigPath)
 		: devicetotalname_(deviceTotalName),
 		  deviceconfigpath_(deviceConfigPath),
-		  loop_(loop),
+		  loop_(loop)
 	{
 		getConfigFileListByPath();
 		load();
@@ -133,10 +133,102 @@ namespace gcc
     	}
     }
 
-    void getFullParams(string deviceid, string id, string paramname, Param& param)
+    void DeviceManager::getFullParams(string deviceid, string id, string paramname, Param& param)
     {
-        TiXmlDocument doc(deviceconfigpath_ + devicetotalname_);
-        
+        string filename = deviceconfigpath_ + devicetotalname_;
+        TiXmlDocument doc(filename);
+        TiXmlNode* node = NULL;
+        TiXmlNode* nodelevel2 = NULL;
+        TiXmlNode* nodelevel3 = NULL;
+        TiXmlNode* nodelevel4 = NULL;
+        TiXmlNode* nodelevel5 = NULL;
+        TiXmlElement* element = NULL;
+
+        doc.LoadFile();
+
+        if (doc.Error() && doc.ErrorId() == TiXmlBase::TIXML_ERROR_OPENING_FILE)
+        {
+            LOG_ERROR << "cannot open xml file: " << filename;
+            return;
+        }
+
+        node = doc.FirstChild("DataConfig");
+        if ((NULL == node) || !(element = node->ToElement()))
+        {
+            LOG_ERROR << "parse config file error: " << filename;
+            return;
+        }
+
+        nodelevel2 = element->FirstChild("Substation");
+        if ((NULL == nodelevel2) || !(element = nodelevel2->ToElement()))
+        {
+            LOG_ERROR << "parse config file error:2 " << filename;
+            return;
+        }
+
+        nodelevel3 = element->FirstChild();
+        while (nodelevel3)
+        {
+            string elementName(nodelevel3->Value());
+            string elementValue(nodelevel3->ToElement()->GetText());
+            string devid(nodelevel3->ToElement()->Attribute("id"));
+
+            if ((elementName != "Device") || (deviceid != devid))
+            {
+                nodelevel3 = nodelevel3->NextSibling();
+                continue;
+            }
+
+            nodelevel4 = nodelevel3->ToElement()->FirstChild();
+            while (nodelevel4)
+            {
+                string mpname(nodelevel4->Value());
+                string mpvalue(nodelevel4->ToElement()->GetText());
+                TiXmlElement* tmpElement = nodelevel4->ToElement();
+
+                if ((mpname != "MeasurePoint") || (tmpElement->Attribute("name") != id))
+                {
+                    nodelevel4 = nodelevel4->NextSibling();
+                    continue;
+                }
+
+                nodelevel5 = nodelevel4->FirstChild();
+                while (nodelevel5)
+                {
+                    string pname(nodelevel5->Value());
+                    string pvalue(nodelevel5->ToElement()->GetText());
+                    TiXmlElement* tmpElement1 = nodelevel5->ToElement();
+
+                    if ((pname != "param") || (tmpElement1->Attribute("name") != paramname))
+                    {
+                        nodelevel5->NextSibling();
+                        continue;
+                    }
+
+                    string pdesc = tmpElement1->Attribute("desc");
+                    string punit = tmpElement1->Attribute("unit");
+                    string pprecision = tmpElement1->Attribute("precision");
+                    string prange = tmpElement1->Attribute("range");
+                    string pfilter = tmpElement1->Attribute("filter");
+                    string paddresslen = tmpElement1->Attribute("addresslen");
+                    string paddress = tmpElement1->Attribute("address");
+
+                    param.desc_ = pdesc;
+                    param.unit_ = punit;
+                    param.precision_ = pprecision;
+                    param.range_ = prange;
+                    param.filter_ = pfilter;
+                    param.addresslen_ = paddresslen;
+                    param.address_ = paddress;
+
+                    return;
+                }
+
+            }
+        }
+       
+
+
     }
 
     void DeviceManager::DeviceManager::load()

@@ -15,7 +15,8 @@ class MeasurePoint;
 class Param
 {
 public:
-	friend class MeasurePoint;
+	//friend class MeasurePoint;
+
 	Param(string name, string desc="", string unit="", string precision="", 
 		string range="", string filter="",
 		string addresslen="", string address="", string registernum="")
@@ -36,7 +37,8 @@ public:
 	{
 
 	}
-private:
+
+public:
 	string name_;
 	string desc_;
 	string unit_;

@@ -7,10 +7,9 @@ namespace dbdky
 {
 namespace gcc
 {
-	MonitorUnit::MonitorUnit(SerialPort* port, string name, string interval, string protocolname, string mac,
+	MonitorUnit::MonitorUnit(string name, string interval, string protocolname, string mac,
 		string manufacturer, string cycleid, string ytime)
-      : port_(port),
-        name_(name),
+      : name_(name),
         interval_(interval),
         protocolname_(protocolname),
         mac_(mac),

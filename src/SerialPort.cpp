@@ -228,9 +228,20 @@ void SerialPort::insertMonitorUnit(string name, string interval, string protocol
         return;
     }
 
-    //TODO:
+    map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+    itr = monitorUnitList_.find(name);
+    if (monitorUnitList_.end() == itr)
+    {
+        return;
+    }
 
+// MonitorUnit(SerialPort* port, string name, string interval, string protocolname, string mac,
+//         string manufacturer, string cycleid, string ytime);
 
+    boost::shared_ptr<MonitorUnit> monitorunit(
+         new MonitorUnit(name, interval, protocolname, mac, manufacturer, cycleid, ytime));
+
+    monitorUnitList_.insert(make_pair<string, boost::shared_ptr<MonitorUnit> >(name, monitorunit));
 }
 
 MonitorUnit* SerialPort::getMonitorUnitByName(string name)

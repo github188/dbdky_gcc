@@ -55,7 +55,7 @@ namespace gcc
 		}
 	}
 
-	void insertParam(Param& param)
+	void MeasurePoint::insertParam(Param& param)
 	{
 		insertParam(param.name_, param.desc_, param.unit_, param.precision_,
 			param.range_, param.filter_, param.addresslen_, param.address_, param.registernum_);
