@@ -38,6 +38,7 @@ public:
 
 	}
 
+    void dumpInfo() const;
 public:
 	string name_;
 	string desc_;

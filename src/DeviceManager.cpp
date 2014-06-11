@@ -466,6 +466,17 @@ namespace gcc
         }
     	}
 
+#if 1
+    {
+        map<string, boost::shared_ptr<SerialPort> >::const_iterator itr;
+
+        for (itr = serialPortList_.begin(); itr != serialPortList_.end(); itr++)
+        {
+            itr->second->dumpMonitorUnitInfo();
+        }
+    }
+#endif
+
     }
 
     void DeviceManager::dumpSerialPortsInfo() const

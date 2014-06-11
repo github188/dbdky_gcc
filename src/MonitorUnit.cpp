@@ -1,6 +1,8 @@
 #include "MonitorUnit.h"
 #include <utility>
 
+#include <utils/Logging.h>
+
 using namespace std;
 
 namespace dbdky
@@ -60,6 +62,23 @@ namespace gcc
         }
 
         return NULL;
+	}
+
+	void MonitorUnit::dumpInfo() const
+	{
+		LOG_INFO << "****************MonitorUnit: " << name_ << "**************";
+	 	LOG_INFO << "INTERVAL: " << interval_;
+	 	LOG_INFO << "PROTOCOLNAME: " << protocolname_;
+	 	LOG_INFO << "MANUFACTURER: " << manufacturer_;
+	 	LOG_INFO << "CYCLEID: " << cycleid_;
+	 	LOG_INFO << "MAC: " << mac_;
+	 	LOG_INFO << "YTIME: " << ytime_;
+	 	LOG_INFO << "++++++MeasurePoints++++++++++++++++++++++++++++++++++++";
+	 	map<string, boost::shared_ptr<MeasurePoint> >::const_iterator itr;
+	 	for (itr = measurePointList_.begin(); itr != measurePointList_.end(); itr++)
+	 	{
+	 		itr->second->dumpInfo();
+	 	}
 	}
 }
 }

@@ -24,6 +24,8 @@ public:
 
 	void insertMeasurePoint(string deviceid, string IEDName, string id, string checktime="");
 	MeasurePoint* getMeasurePointByDeviceid(string deviceid);
+
+	void dumpInfo() const;
 private:
 	string name_;
 	string interval_;

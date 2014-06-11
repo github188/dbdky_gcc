@@ -67,6 +67,8 @@ public:
     MonitorUnit* getMonitorUnitByName(string name);
 
     void dumpInfo() const;
+    
+    void dumpMonitorUnitInfo() const;
 
 private:
     int init();

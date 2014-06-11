@@ -22,6 +22,7 @@ set(com_service_SRCS
   DeviceManager.cpp
   MonitorUnit.cpp
   MeasurePoint.cpp
+  param.cpp
   )
 
 add_executable(dbdky_gcc ${com_service_SRCS})

@@ -1,5 +1,6 @@
 #include "MeasurePoint.h"
 
+#include <utils/Logging.h>
 
 namespace dbdky
 {
@@ -59,6 +60,21 @@ namespace gcc
 	{
 		insertParam(param.name_, param.desc_, param.unit_, param.precision_,
 			param.range_, param.filter_, param.addresslen_, param.address_, param.registernum_);
+	}
+
+	void MeasurePoint::dumpInfo() const
+	{
+		LOG_INFO << "******************MeasurePoint*****************************";
+		LOG_INFO << "DEVICEID: " << deviceid_;
+	 	LOG_INFO << "IEDNAME: " << IEDName_;
+	 	LOG_INFO << "ID: " << id_;
+	 	LOG_INFO << "CHECKTIME: " << checktime_;
+
+	 	map<string, boost::shared_ptr<Param> >::const_iterator itr;
+	 	for (itr = paramList_.begin(); itr != paramList_.end(); itr++)
+	 	{
+	 		itr->second->dumpInfo();
+	 	}
 	}
 }
 }

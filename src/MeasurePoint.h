@@ -26,6 +26,9 @@ public:
 		string range="", string filter="",
 		string addresslen="", string address="", string registernum="");
 	void insertParam(Param& param);
+
+	void dumpInfo() const;
+	
 private:
 	string deviceid_;
 	string IEDName_;

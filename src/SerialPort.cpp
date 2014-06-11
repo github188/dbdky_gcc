@@ -273,5 +273,15 @@ void SerialPort::dumpInfo() const
     LOG_INFO << "Parity: " << config_.parity_;
 }
 
+void SerialPort::dumpMonitorUnitInfo() const
+{
+    map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+
+    for (itr = monitorUnitList_.begin(); itr != monitorUnitList_.end(); itr++)
+    {
+        itr->second->dumpInfo();
+    }
+}
+
 }
 }
