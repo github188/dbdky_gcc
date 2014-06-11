@@ -33,7 +33,11 @@ namespace gcc
 
 	void com_service::start()
 	{
-		DeviceManager::getInstance(loop_)->start();
+		DeviceManager* devmgr = DeviceManager::getInstance(loop_);
+		LOG_INFO << "ooo";
+	    devmgr->start();
+	    //DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
+	    
 		//DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
 		// vector<string> files = DeviceManager::getInstance(loop_)->getFiles();
 		// LOG_INFO << files.size();

@@ -3,7 +3,9 @@
 
 #include <string>
 
+
 using namespace std;
+
 
 namespace dbdky
 {
@@ -30,7 +32,6 @@ public:
 	    address_(address),
 	    registernum_(registernum)
 	    {
-
 	    }
 
 	~Param()

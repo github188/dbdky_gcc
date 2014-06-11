@@ -18,15 +18,15 @@ namespace dbdky
 {
 namespace gcc
 {
-	boost::shared_ptr<DeviceManager> DeviceManager::instance_;
-	boost::shared_ptr<DeviceManager> DeviceManager::getInstance(EventLoop* loop)
+	DeviceManager* DeviceManager::instance_ = NULL;
+	DeviceManager* DeviceManager::getInstance(EventLoop* loop)
 	{
-		if (!instance_.get())
-		{
-			instance_ = boost::shared_ptr<DeviceManager>(new DeviceManager(loop));
-		}
+		  if (!instance_)
+		  {
+			   instance_ = new DeviceManager(loop);;
+		  }
 
-		return instance_;
+		  return instance_;
 	}
 
 	DeviceManager::DeviceManager(EventLoop* loop, string deviceTotalName, string deviceConfigPath)
@@ -34,8 +34,8 @@ namespace gcc
 		  deviceconfigpath_(deviceConfigPath),
 		  loop_(loop)
 	{
-		getConfigFileListByPath();
-		load();
+		  getConfigFileListByPath();
+		  load();
 	}
 
 	DeviceManager::~DeviceManager()
@@ -45,60 +45,60 @@ namespace gcc
 
 	void DeviceManager::update(string deviceTotalName, string deviceConfigPath)
 	{
-		configfiles_.clear();
-		devicetotalname_ = deviceTotalName;
-		deviceconfigpath_ = deviceConfigPath;
-		getConfigFileListByPath();
+		  configfiles_.clear();
+		  devicetotalname_ = deviceTotalName;
+		  deviceconfigpath_ = deviceConfigPath;
+		  getConfigFileListByPath();
 	}
 
 	void DeviceManager::getConfigFileListByPath()
 	{
-		if (!configfiles_.empty())
-		{
-			configfiles_.clear();
-		}
+		  if (!configfiles_.empty())
+		  {
+			   configfiles_.clear();
+		  }
 
-		DIR *dp;
-		struct dirent *entry;
-		struct stat statbuf;
-		if ((dp = ::opendir(deviceconfigpath_.c_str())) == NULL)
-		{
-			LOG_ERROR << "Cannot open directory: " << deviceconfigpath_;
-			return;
-		}
+		  DIR *dp;
+		  struct dirent *entry;
+		  struct stat statbuf;
+		  if ((dp = ::opendir(deviceconfigpath_.c_str())) == NULL)
+		  {
+			   LOG_ERROR << "Cannot open directory: " << deviceconfigpath_;
+			   return;
+		  }
 
-		::chdir(deviceconfigpath_.c_str());
+		  ::chdir(deviceconfigpath_.c_str());
 
-		while ((entry = ::readdir(dp)) != NULL)
-		{
-			::lstat(entry->d_name,&statbuf);
-			if (S_ISDIR(statbuf.st_mode))
-			{
-				continue;
+		  while ((entry = ::readdir(dp)) != NULL)
+		  {
+			   ::lstat(entry->d_name,&statbuf);
+			   if (S_ISDIR(statbuf.st_mode))
+			   {
+				    continue;
 
-			}
-			else
-			{
-				string filename;
-				filename += entry->d_name;
-				if ((filename == "FilterResult.xml") || (filename == "Comserver.xml")
-				 || (filename == "Filters.xml") || (filename == "DeviceTotal_v1.0.xml"))
-				{
-					continue;
-				}
+			   }
+			   else
+			   {
+				      string filename;
+				      filename += entry->d_name;
+				      if ((filename == "FilterResult.xml") || (filename == "Comserver.xml")
+				        || (filename == "Filters.xml") || (filename == "DeviceTotal_v1.0.xml"))
+				      {
+					         continue;
+				      }
 
-				if (string::npos != filename.find(".xml"))
-				{
-					configfiles_.push_back(filename);
-				}
-				else
-				{
-					continue;
-				}
-			}
-		}
-		::chdir("..");
-		::closedir(dp);
+				      if (string::npos != filename.find(".xml"))
+				      {
+					         configfiles_.push_back(filename);
+				      }
+				      else
+				      {
+					        continue;
+				      }
+			    }
+		    }
+      ::chdir("..");
+		  ::closedir(dp);
 	}
    
 	SerialPort* DeviceManager::getSerialPortByName(const string& name)
@@ -137,6 +137,7 @@ namespace gcc
     {
         string filename = deviceconfigpath_ + devicetotalname_;
         TiXmlDocument doc(filename);
+
         TiXmlNode* node = NULL;
         TiXmlNode* nodelevel2 = NULL;
         TiXmlNode* nodelevel3 = NULL;
@@ -170,7 +171,7 @@ namespace gcc
         while (nodelevel3)
         {
             string elementName(nodelevel3->Value());
-            string elementValue(nodelevel3->ToElement()->GetText());
+            //string elementValue(nodelevel3->ToElement()->GetText());
             string devid(nodelevel3->ToElement()->Attribute("id"));
 
             if ((elementName != "Device") || (deviceid != devid))
@@ -183,7 +184,7 @@ namespace gcc
             while (nodelevel4)
             {
                 string mpname(nodelevel4->Value());
-                string mpvalue(nodelevel4->ToElement()->GetText());
+                //string mpvalue(nodelevel4->ToElement()->GetText());
                 TiXmlElement* tmpElement = nodelevel4->ToElement();
 
                 if ((mpname != "MeasurePoint") || (tmpElement->Attribute("name") != id))
@@ -196,7 +197,7 @@ namespace gcc
                 while (nodelevel5)
                 {
                     string pname(nodelevel5->Value());
-                    string pvalue(nodelevel5->ToElement()->GetText());
+                    //string pvalue(nodelevel5->ToElement()->GetText());
                     TiXmlElement* tmpElement1 = nodelevel5->ToElement();
 
                     if ((pname != "param") || (tmpElement1->Attribute("name") != paramname))
@@ -205,13 +206,13 @@ namespace gcc
                         continue;
                     }
 
-                    string pdesc = tmpElement1->Attribute("desc");
-                    string punit = tmpElement1->Attribute("unit");
-                    string pprecision = tmpElement1->Attribute("precision");
-                    string prange = tmpElement1->Attribute("range");
-                    string pfilter = tmpElement1->Attribute("filter");
-                    string paddresslen = tmpElement1->Attribute("addresslen");
-                    string paddress = tmpElement1->Attribute("address");
+                    string pdesc(tmpElement1->Attribute("desc"));
+                    string punit(tmpElement1->Attribute("unit"));
+                    string pprecision(tmpElement1->Attribute("precision"));
+                    string prange(tmpElement1->Attribute("range"));
+                    string pfilter(tmpElement1->Attribute("filter"));
+                    string paddresslen(tmpElement1->Attribute("addresslen"));
+                    string paddress(tmpElement1->Attribute("address"));
 
                     param.desc_ = pdesc;
                     param.unit_ = punit;
@@ -373,7 +374,9 @@ namespace gcc
         while (inside)
         {
             TiXmlElement* unit = inside->ToElement();
-            if ((inside->Value() != "MonitorUnit") || (!unit))
+
+            string nodename(inside->Value());
+            if ((nodename != "MonitorUnit") || (!unit))
             {
                 inside = inside->NextSibling();
                 continue;
@@ -395,12 +398,14 @@ namespace gcc
                 continue;
             }
 
+
             pPort->insertMonitorUnit(monitorUnitName, monitorUnitInterval, 
                   monitorProtocolName, monitorUnitMac, monitorUnitManufacturer,
                   monitorUnitCycleid, monitorUnitYtime);
 
             TiXmlNode* nodelevel2 = inside->FirstChild();
             TiXmlElement* elelevel2 = NULL;
+
             if (!nodelevel2)
             {
                 inside = inside->NextSibling();
@@ -410,7 +415,9 @@ namespace gcc
             while (nodelevel2)
             {
                 elelevel2 = nodelevel2->ToElement();
-                if ((nodelevel2->Value() != "MeasurePoint") 
+                string nodelevel2name(nodelevel2->Value());
+
+                if ((nodelevel2name != "MeasurePoint") 
                   || !elelevel2)
                 {
                     nodelevel2 = nodelevel2->NextSibling();
@@ -443,18 +450,21 @@ namespace gcc
                 while (nodelevel3)
                 {
                     elelevel3 = nodelevel3->ToElement();
-                    if ((nodelevel3->Value() != "param") || !elelevel3)
+                    string nodelevel3name(nodelevel3->Value());
+                    if ((nodelevel3name != "param") || !elelevel3)
                     {
                         nodelevel3 = nodelevel3->NextSibling();
                         continue;
                     }
 
                     string paramName = elelevel3->Attribute("name");
-
                     Param tmpParam(paramName);
                     getFullParams(pointDeviceid, pointid, paramName, tmpParam);
                     MeasurePoint* pMeasurePoint = pUnit->getMeasurePointByDeviceid(pointDeviceid);
-                    pMeasurePoint->insertParam(tmpParam);
+                    if (pMeasurePoint)
+                    {
+                        pMeasurePoint->insertParam(tmpParam);
+                    }
 
                     nodelevel3 = nodelevel3->NextSibling();
 
@@ -465,18 +475,7 @@ namespace gcc
 
         }
     	}
-
-#if 1
-    {
-        map<string, boost::shared_ptr<SerialPort> >::const_iterator itr;
-
-        for (itr = serialPortList_.begin(); itr != serialPortList_.end(); itr++)
-        {
-            itr->second->dumpMonitorUnitInfo();
-        }
-    }
-#endif
-
+      LOG_INFO << "LEAVE";
     }
 
     void DeviceManager::dumpSerialPortsInfo() const
@@ -490,6 +489,7 @@ namespace gcc
 
     void DeviceManager::start()
     {
+        LOG_INFO << "111";
         map<string, boost::shared_ptr<SerialPort> >::const_iterator itr;
         for (itr = serialPortList_.begin(); itr != serialPortList_.end(); itr++)
         {

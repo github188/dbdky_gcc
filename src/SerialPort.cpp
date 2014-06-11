@@ -230,7 +230,7 @@ void SerialPort::insertMonitorUnit(string name, string interval, string protocol
 
     map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
     itr = monitorUnitList_.find(name);
-    if (monitorUnitList_.end() == itr)
+    if (monitorUnitList_.end() != itr)
     {
         return;
     }

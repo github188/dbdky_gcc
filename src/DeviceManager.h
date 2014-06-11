@@ -30,7 +30,7 @@ namespace gcc
 class DeviceManager : boost::noncopyable
 {
 public:
-    static boost::shared_ptr<DeviceManager> getInstance(EventLoop* loop);
+    static DeviceManager* getInstance(EventLoop* loop);
 	DeviceManager(EventLoop* loop, string deviceTotalName = "./DeviceTotal_v1.0.xml", string deviceConfigPath ="./");
 	~DeviceManager();
     void update(string deviceTotalName = "./DeviceTotal_v1.0.xml", string deviceConfigPath ="./");
@@ -50,7 +50,7 @@ public:
 private:
     void load();
     void getFullParams(string deviceid, string id, string paramname, Param& param);
-    static boost::shared_ptr<DeviceManager> instance_;
+    static DeviceManager* instance_;
     string devicetotalname_;
     string deviceconfigpath_;
     EventLoop* loop_;
