@@ -18,7 +18,7 @@ namespace gcc
 class MonitorUnit
 {
 public:
-	MonitorUnit(SerialPort* port, string name, int interval, string protocolname, string mac,
+	MonitorUnit(SerialPort* port, string name, string interval, string protocolname, string mac,
 		string manufacturer, string cycleid, string ytime);
 	void onIntervalTimer();
 
@@ -26,7 +26,7 @@ public:
 	MeasurePoint* getMeasurePointByDeviceid(string deviceid);
 private:
 	string name_;
-	int interval_;
+	string interval_;
 	string protocolname_;
 	SerialPort* port_;
 	string manufacturer_;

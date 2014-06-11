@@ -9,9 +9,13 @@ namespace dbdky
 {
 namespace gcc
 {
+
+class MeasurePoint;
+
 class Param
 {
 public:
+	friend class MeasurePoint;
 	Param(string name, string desc="", string unit="", string precision="", 
 		string range="", string filter="",
 		string addresslen="", string address="", string registernum="")

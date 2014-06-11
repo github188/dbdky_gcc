@@ -54,5 +54,11 @@ namespace gcc
 			paramList_.insert(make_pair<string, boost::shared_ptr<Param> >(name, param));
 		}
 	}
+
+	void insertParam(Param& param)
+	{
+		insertParam(param.name_, param.desc_, param.unit_, param.precision_,
+			param.range_, param.filter_, param.addresslen_, param.address_, param.registernum_);
+	}
 }
 }

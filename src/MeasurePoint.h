@@ -25,6 +25,7 @@ public:
 	void insertParam(string name, string desc="", string unit="", string precision="", 
 		string range="", string filter="",
 		string addresslen="", string address="", string registernum="");
+	void insertParam(Param& param);
 private:
 	string deviceid_;
 	string IEDName_;

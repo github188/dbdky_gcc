@@ -14,6 +14,7 @@
 #include <termios.h>
 #include <errno.h>
 
+
 namespace dbdky
 {
 namespace gcc
@@ -27,7 +28,26 @@ SerialPort::SerialPort(EventLoop* loop, string name, string portname, string bau
       started_(false),
       fd_(-1)
 {
+    config_.name_ = name;
+    config_.desc_ = "";
+    config_.portname_ = portname;
+    config_.baudrate_ = baudrate;
+    config_.databits_ = databits;
+    config_.stopbits_ = stopbits;
+
     threadPool_->setMaxQueueSize(6);
+}
+
+SerialPort::SerialPort(EventLoop* loop, ComConfig config)
+    : name_(config.name_),
+      devicename_(config.portname_),
+      config_(config),
+      loop_(loop),
+      threadPool_(new ThreadPool("thread" + name_)),
+      started_(false),
+      fd_(-1)
+{
+
 }
 
 SerialPort::~SerialPort()
@@ -200,7 +220,7 @@ _fail:
 }
 
 
-void SerialPort::insertMonitorUnit(string name, int interval, string protocolname, 
+void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, 
     string mac, string manufacturer, string cycleid, string ytime)
 {
     if (name.empty())
@@ -228,6 +248,18 @@ MonitorUnit* SerialPort::getMonitorUnitByName(string name)
     }
     
     return NULL;
+}
+
+void SerialPort::dumpInfo() const
+{
+    LOG_INFO << "*****************************************";
+    LOG_INFO << "SerialPort: " << name_;
+    LOG_INFO << "DESC: " << config_.desc_;
+    LOG_INFO << "PortName: " << config_.portname_;
+    LOG_INFO << "BaudRate: " << config_.baudrate_;
+    LOG_INFO << "DataBits: " << config_.databits_;
+    LOG_INFO << "StopBits: " << config_.stopbits_;
+    LOG_INFO << "Parity: " << config_.parity_;
 }
 
 }
