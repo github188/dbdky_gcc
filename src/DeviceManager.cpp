@@ -202,7 +202,7 @@ namespace gcc
 
                     if ((pname != "param") || (tmpElement1->Attribute("name") != paramname))
                     {
-                        nodelevel5->NextSibling();
+                        nodelevel5 = nodelevel5->NextSibling();
                         continue;
                     }
 
@@ -467,15 +467,15 @@ namespace gcc
                     }
 
                     nodelevel3 = nodelevel3->NextSibling();
-
                 }
+
+                nodelevel2 = nodelevel2->NextSibling();
             }
 
             inside = inside->NextSibling();
 
         }
     	}
-      LOG_INFO << "LEAVE";
     }
 
     void DeviceManager::dumpSerialPortsInfo() const
@@ -489,7 +489,6 @@ namespace gcc
 
     void DeviceManager::start()
     {
-        LOG_INFO << "111";
         map<string, boost::shared_ptr<SerialPort> >::const_iterator itr;
         for (itr = serialPortList_.begin(); itr != serialPortList_.end(); itr++)
         {

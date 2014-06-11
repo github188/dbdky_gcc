@@ -34,7 +34,6 @@ namespace gcc
 	void com_service::start()
 	{
 		DeviceManager* devmgr = DeviceManager::getInstance(loop_);
-		LOG_INFO << "ooo";
 	    devmgr->start();
 	    //DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
 	    
