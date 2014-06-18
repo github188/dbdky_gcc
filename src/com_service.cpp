@@ -35,19 +35,6 @@ namespace gcc
 	{
 		DeviceManager* devmgr = DeviceManager::getInstance(loop_);
 	    devmgr->start();
-	    devmgr->dumpSerialPortsInfo();
-	    //DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
-	    
-		//DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
-		// vector<string> files = DeviceManager::getInstance(loop_)->getFiles();
-		// LOG_INFO << files.size();
-		// vector<string>::const_iterator itr;
-		// for (itr = files.begin(); itr != files.end(); itr++)
-		// {
-		// 	LOG_INFO << "File: " << *itr;
-		// }
-		// SerialPort port(loop_, "/dev/pts/14");
-		// port.start();
 	}
 
 	void com_service::stop()

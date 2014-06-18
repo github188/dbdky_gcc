@@ -85,8 +85,6 @@ void SerialPort::start()
 
     started_ = true;
     threadPool_->start(2);
-    // queryDataTimer_ = loop_->runEvery(queryInterval_,
-    //     boost::bind(&SerialPort::onQueryDataTimer, this));
 
     threadPool_->run(boost::bind(&SerialPort::listen, this));
 
@@ -146,7 +144,6 @@ void SerialPort::release()
 
 void SerialPort::onQueryDataTimer(int interval)
 {
-    LOG_INFO << "onQueryDataTimer";
     //TODO:
     // <TimerID, <ID, type>>,
 
@@ -330,7 +327,8 @@ void SerialPort::dumpMonitorUnitInfo() const
         list<int>::const_iterator itr1;
         for (itr1 = intervals.begin(); itr1 != intervals.end(); itr1++)
         {
-            TimerId id = loop_->runEvery(*itr1,
+            double timeinterval = (*itr1)/1000;
+            TimerId id = loop_->runEvery(timeinterval,
                 boost::bind(&SerialPort::onQueryDataTimer, this, *itr1));
             timers_.insert(make_pair<int, TimerId>(*itr1, id));
         }
@@ -371,7 +369,7 @@ void SerialPort::dumpMonitorUnitInfo() const
             }
 
         }
-        
+
         return ret;
     }
 }

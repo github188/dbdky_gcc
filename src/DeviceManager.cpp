@@ -34,8 +34,8 @@ namespace gcc
 		  deviceconfigpath_(deviceConfigPath),
 		  loop_(loop)
 	{
-		  getConfigFileListByPath();
-		  load();
+		getConfigFileListByPath();
+		load();
 	}
 
 	DeviceManager::~DeviceManager()
@@ -45,60 +45,60 @@ namespace gcc
 
 	void DeviceManager::update(string deviceTotalName, string deviceConfigPath)
 	{
-		  configfiles_.clear();
-		  devicetotalname_ = deviceTotalName;
-		  deviceconfigpath_ = deviceConfigPath;
-		  getConfigFileListByPath();
+		configfiles_.clear();
+		devicetotalname_ = deviceTotalName;
+		deviceconfigpath_ = deviceConfigPath;
+		getConfigFileListByPath();
 	}
 
 	void DeviceManager::getConfigFileListByPath()
 	{
-		  if (!configfiles_.empty())
-		  {
-			   configfiles_.clear();
-		  }
+		if (!configfiles_.empty())
+		{
+		    configfiles_.clear();
+		}
 
-		  DIR *dp;
-		  struct dirent *entry;
-		  struct stat statbuf;
-		  if ((dp = ::opendir(deviceconfigpath_.c_str())) == NULL)
-		  {
-			   LOG_ERROR << "Cannot open directory: " << deviceconfigpath_;
-			   return;
-		  }
+		DIR *dp;
+		struct dirent *entry;
+		struct stat statbuf;
+		if ((dp = ::opendir(deviceconfigpath_.c_str())) == NULL)
+		{
+			LOG_ERROR << "Cannot open directory: " << deviceconfigpath_;
+			return;
+		}
 
-		  ::chdir(deviceconfigpath_.c_str());
+		::chdir(deviceconfigpath_.c_str());
 
-		  while ((entry = ::readdir(dp)) != NULL)
-		  {
-			   ::lstat(entry->d_name,&statbuf);
-			   if (S_ISDIR(statbuf.st_mode))
-			   {
-				    continue;
+		while ((entry = ::readdir(dp)) != NULL)
+		{
+			::lstat(entry->d_name,&statbuf);
+			if (S_ISDIR(statbuf.st_mode))
+			{
+			    continue;
+			}
+			else
+			{
+				string filename;
+				filename += entry->d_name;
+				if ((filename == "FilterResult.xml") || (filename == "Comserver.xml")
+				    || (filename == "Filters.xml") || (filename == "DeviceTotal_v1.0.xml"))
+				{
+					continue;
+				}
 
-			   }
-			   else
-			   {
-				      string filename;
-				      filename += entry->d_name;
-				      if ((filename == "FilterResult.xml") || (filename == "Comserver.xml")
-				        || (filename == "Filters.xml") || (filename == "DeviceTotal_v1.0.xml"))
-				      {
-					         continue;
-				      }
-
-				      if (string::npos != filename.find(".xml"))
-				      {
-					         configfiles_.push_back(filename);
-				      }
-				      else
-				      {
-					        continue;
-				      }
-			    }
-		    }
-      ::chdir("..");
-		  ::closedir(dp);
+				if (string::npos != filename.find(".xml"))
+				{
+					configfiles_.push_back(filename);
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+      
+        ::chdir("..");
+		::closedir(dp);
 	}
    
 	SerialPort* DeviceManager::getSerialPortByName(const string& name)
@@ -268,13 +268,10 @@ namespace gcc
     	}
 
     	string filepath1 = filepath.substr(0, st);
-      deviceconfigpath_ = filepath1;
+        deviceconfigpath_ = filepath1;
 
     	for (itr = configfiles_.begin(); itr != configfiles_.end(); itr++)
     	{
-    		
-    		
-    		//string filename = "/home/kevin/workspace/dbdky_gcc/build/debug/bin/" + *itr;
     		string filename = filepath1 + *itr;
     		TiXmlDocument doc(filename);
     		TiXmlNode* node = NULL;
@@ -369,113 +366,112 @@ namespace gcc
 
     		insertSerialPort(comconfig);
 
-        //Now we instantiate the MonitorUnit & MeasurePoint & Params
-        inside = inside->NextSibling();
-        while (inside)
-        {
-            TiXmlElement* unit = inside->ToElement();
-
-            string nodename(inside->Value());
-            if ((nodename != "MonitorUnit") || (!unit))
+            //Now we instantiate the MonitorUnit & MeasurePoint & Params
+            inside = inside->NextSibling();
+            while (inside)
             {
-                inside = inside->NextSibling();
-                continue;
-            }
+                TiXmlElement* unit = inside->ToElement();
 
-            string monitorUnitName = unit->Attribute("name");
-            string monitorUnitInterval = unit->Attribute("interval");
-            string monitorProtocolName = unit->Attribute("protocolname");
-            string monitorUnitPort = unit->Attribute("port");
-            string monitorUnitManufacturer = unit->Attribute("manufacturer");
-            string monitorUnitCycleid = unit->Attribute("cycleid");
-            string monitorUnitMac = unit->Attribute("mac");
-            string monitorUnitYtime = unit->Attribute("ytime");
-
-            SerialPort* pPort = getSerialPortByName(monitorUnitPort);
-            if (!pPort)
-            {
-                inside = inside->NextSibling();
-                continue;
-            }
-
-
-            pPort->insertMonitorUnit(monitorUnitName, monitorUnitInterval, 
-                  monitorProtocolName, monitorUnitMac, monitorUnitManufacturer,
-                  monitorUnitCycleid, monitorUnitYtime);
-
-            TiXmlNode* nodelevel2 = inside->FirstChild();
-            TiXmlElement* elelevel2 = NULL;
-
-            if (!nodelevel2)
-            {
-                inside = inside->NextSibling();
-                continue;
-            }
-
-            while (nodelevel2)
-            {
-                elelevel2 = nodelevel2->ToElement();
-                string nodelevel2name(nodelevel2->Value());
-
-                if ((nodelevel2name != "MeasurePoint") 
-                  || !elelevel2)
+                string nodename(inside->Value());
+                if ((nodename != "MonitorUnit") || (!unit))
                 {
-                    nodelevel2 = nodelevel2->NextSibling();
+                    inside = inside->NextSibling();
                     continue;
                 }
 
-                string pointDeviceid = elelevel2->Attribute("deviceid");
-                string pointIEDName = elelevel2->Attribute("IEDName");
-                string pointid = elelevel2->Attribute("id");
-                string pointchecktime = elelevel2->Attribute("checktime");
+                string monitorUnitName = unit->Attribute("name");
+                string monitorUnitInterval = unit->Attribute("interval");
+                string monitorProtocolName = unit->Attribute("protocolname");
+                string monitorUnitPort = unit->Attribute("port");
+                string monitorUnitManufacturer = unit->Attribute("manufacturer");
+                string monitorUnitCycleid = unit->Attribute("cycleid");
+                string monitorUnitMac = unit->Attribute("mac");
+                string monitorUnitYtime = unit->Attribute("ytime");
 
-                MonitorUnit* pUnit = pPort->getMonitorUnitByName(monitorUnitName);
-                if (!pUnit)
+                SerialPort* pPort = getSerialPortByName(monitorUnitPort);
+                if (!pPort)
                 {
-                    nodelevel2 = nodelevel2->NextSibling();
+                    inside = inside->NextSibling();
                     continue;
                 }
 
-                pUnit->insertMeasurePoint(pointDeviceid, pointIEDName, pointid, pointchecktime);
+                pPort->insertMonitorUnit(monitorUnitName, monitorUnitInterval, 
+                    monitorProtocolName, monitorUnitMac, monitorUnitManufacturer,
+                    monitorUnitCycleid, monitorUnitYtime);
 
-                TiXmlNode* nodelevel3 = nodelevel2->FirstChild();
-                TiXmlElement* elelevel3 = NULL;
+                TiXmlNode* nodelevel2 = inside->FirstChild();
+                TiXmlElement* elelevel2 = NULL;
 
-                if (!nodelevel3)
+                if (!nodelevel2)
                 {
-                  nodelevel2 = nodelevel2->NextSibling();
-                  continue;
+                    inside = inside->NextSibling();
+                    continue;
                 }
 
-                while (nodelevel3)
+                while (nodelevel2)
                 {
-                    elelevel3 = nodelevel3->ToElement();
-                    string nodelevel3name(nodelevel3->Value());
-                    if ((nodelevel3name != "param") || !elelevel3)
+                    elelevel2 = nodelevel2->ToElement();
+                    string nodelevel2name(nodelevel2->Value());
+
+                    if ((nodelevel2name != "MeasurePoint") 
+                        || !elelevel2)
                     {
-                        nodelevel3 = nodelevel3->NextSibling();
+                        nodelevel2 = nodelevel2->NextSibling();
                         continue;
                     }
 
-                    string paramName = elelevel3->Attribute("name");
-                    Param tmpParam(paramName);
-                    getFullParams(pointDeviceid, pointid, paramName, tmpParam);
-                    MeasurePoint* pMeasurePoint = pUnit->getMeasurePointByDeviceid(pointDeviceid);
-                    if (pMeasurePoint)
+                    string pointDeviceid = elelevel2->Attribute("deviceid");
+                    string pointIEDName = elelevel2->Attribute("IEDName");
+                    string pointid = elelevel2->Attribute("id");
+                    string pointchecktime = elelevel2->Attribute("checktime");
+
+                    MonitorUnit* pUnit = pPort->getMonitorUnitByName(monitorUnitName);
+                    if (!pUnit)
                     {
-                        pMeasurePoint->insertParam(tmpParam);
+                        nodelevel2 = nodelevel2->NextSibling();
+                        continue;
                     }
 
-                    nodelevel3 = nodelevel3->NextSibling();
+                    pUnit->insertMeasurePoint(pointDeviceid, pointIEDName, pointid, pointchecktime);
+
+                    TiXmlNode* nodelevel3 = nodelevel2->FirstChild();
+                    TiXmlElement* elelevel3 = NULL;
+
+                    if (!nodelevel3)
+                    {
+                        nodelevel2 = nodelevel2->NextSibling();
+                        continue;
+                    }
+
+                    while (nodelevel3)
+                    {
+                        elelevel3 = nodelevel3->ToElement();
+                        string nodelevel3name(nodelevel3->Value());
+                        if ((nodelevel3name != "param") || !elelevel3)
+                        {
+                            nodelevel3 = nodelevel3->NextSibling();
+                            continue;
+                        }
+
+                        string paramName = elelevel3->Attribute("name");
+                        Param tmpParam(paramName);
+                        getFullParams(pointDeviceid, pointid, paramName, tmpParam);
+                        MeasurePoint* pMeasurePoint = pUnit->getMeasurePointByDeviceid(pointDeviceid);
+                        if (pMeasurePoint)
+                        {
+                            pMeasurePoint->insertParam(tmpParam);
+                        }
+
+                        nodelevel3 = nodelevel3->NextSibling();
+                    }
+
+                    nodelevel2 = nodelevel2->NextSibling();
                 }
 
-                nodelevel2 = nodelevel2->NextSibling();
+                inside = inside->NextSibling();
+
             }
-
-            inside = inside->NextSibling();
-
         }
-    	}
     }
 
     void DeviceManager::dumpSerialPortsInfo() const
