@@ -26,6 +26,12 @@ public:
 	MeasurePoint* getMeasurePointByDeviceid(string deviceid);
 
 	void dumpInfo() const;
+
+	string getInterval() const
+	{
+		return interval_;
+	}
+
 private:
 	string name_;
 	string interval_;

@@ -1,6 +1,7 @@
 #include "SerialPort.h"
 
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include <utils/Logging.h>
 
@@ -13,6 +14,10 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <errno.h>
+
+#include <utility>
+
+using namespace std;
 
 
 namespace dbdky
@@ -63,6 +68,13 @@ void SerialPort::start()
         return;
     }
 
+
+    if (!timers_.empty())
+    {
+        cancelTimers();
+        timers_.clear();
+    }
+
     if (-1 == init())
     {
         LOG_ERROR << "Fail to init serial:" << devicename_;
@@ -78,6 +90,7 @@ void SerialPort::start()
 
     threadPool_->run(boost::bind(&SerialPort::listen, this));
 
+    startTimers();
     
 #if 0
     char read_buf[4096];
@@ -131,7 +144,7 @@ void SerialPort::release()
     }
 }
 
-void SerialPort::onQueryDataTimer()
+void SerialPort::onQueryDataTimer(int interval)
 {
     LOG_INFO << "onQueryDataTimer";
     //TODO:
@@ -235,8 +248,6 @@ void SerialPort::insertMonitorUnit(string name, string interval, string protocol
         return;
     }
 
-// MonitorUnit(SerialPort* port, string name, string interval, string protocolname, string mac,
-//         string manufacturer, string cycleid, string ytime);
 
     boost::shared_ptr<MonitorUnit> monitorunit(
          new MonitorUnit(name, interval, protocolname, mac, manufacturer, cycleid, ytime));
@@ -285,5 +296,83 @@ void SerialPort::dumpMonitorUnitInfo() const
     }
 }
 
+
+    void SerialPort::startTimers()
+    {
+        cancelTimers();
+        list<int> intervals;
+
+        map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+        for (itr = monitorUnitList_.begin(); itr != monitorUnitList_.end(); itr++)
+        {
+            if (!itr->second)
+            {
+                continue;
+            }
+
+            string sInterval = itr->second->getInterval();
+            int interval;
+            try
+            {
+                interval = boost::lexical_cast<int>(sInterval);
+            }
+            catch (boost::bad_lexical_cast& e)
+            {
+                continue;
+            }
+
+            intervals.push_back(interval);
+        }
+
+        intervals.sort();
+        intervals.unique();
+
+        list<int>::const_iterator itr1;
+        for (itr1 = intervals.begin(); itr1 != intervals.end(); itr1++)
+        {
+            TimerId id = loop_->runEvery(*itr1,
+                boost::bind(&SerialPort::onQueryDataTimer, this, *itr1));
+            timers_.insert(make_pair<int, TimerId>(*itr1, id));
+        }
+       
+    }
+
+    void SerialPort::cancelTimers()
+    {
+        map<int, TimerId>::const_iterator itr;
+        for (itr = timers_.begin(); itr != timers_.end(); itr++)
+        {
+            loop_->cancel(itr->second);
+        }
+
+        timers_.clear();
+    }
+
+    list<boost::shared_ptr<MonitorUnit> > SerialPort::getMonitorsByInterval(int interval)
+    {
+        list<boost::shared_ptr<MonitorUnit> > ret;
+
+        map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+        for (itr = monitorUnitList_.begin(); itr != monitorUnitList_.end(); itr++)
+        {
+            int monitorInterval;
+            try
+            {
+                monitorInterval = boost::lexical_cast<int>(itr->second->getInterval());
+            }
+            catch (boost::bad_lexical_cast& e)
+            {
+                continue;
+            }
+
+            if (interval == monitorInterval)
+            {
+                ret.push_back(itr->second);
+            }
+
+        }
+        
+        return ret;
+    }
 }
 }

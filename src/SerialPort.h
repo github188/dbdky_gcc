@@ -7,6 +7,7 @@
 
 #include <string>
 #include <map>
+#include <list>
 
 
 #include <port/EventLoop.h>
@@ -71,6 +72,13 @@ public:
     void dumpMonitorUnitInfo() const;
 
 private:
+    void makeTimerList();
+    void startTimers();
+    void cancelTimers();
+
+    list<boost::shared_ptr<MonitorUnit> > getMonitorsByInterval(int interval);
+
+    map<int, TimerId> timers_;
     int init();
 
 	int fd_;
@@ -80,9 +88,9 @@ private:
     ComConfig config_;
     boost::scoped_ptr<ThreadPool> threadPool_;
 
-    TimerId queryDataTimer_;
+    //TimerId queryDataTimer_;
     //uint16_t queryInterval_;
-    void onQueryDataTimer();
+    void onQueryDataTimer(int);
     bool started_;
     //pdu::ProtocolType pType_;
 
