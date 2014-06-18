@@ -271,6 +271,8 @@ void SerialPort::dumpInfo() const
     LOG_INFO << "DataBits: " << config_.databits_;
     LOG_INFO << "StopBits: " << config_.stopbits_;
     LOG_INFO << "Parity: " << config_.parity_;
+
+    dumpMonitorUnitInfo();
 }
 
 void SerialPort::dumpMonitorUnitInfo() const

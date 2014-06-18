@@ -35,6 +35,7 @@ namespace gcc
 	{
 		DeviceManager* devmgr = DeviceManager::getInstance(loop_);
 	    devmgr->start();
+	    devmgr->dumpSerialPortsInfo();
 	    //DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
 	    
 		//DeviceManager::getInstance(loop_)->dumpSerialPortsInfo();
