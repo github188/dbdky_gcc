@@ -14,6 +14,9 @@
 #include <utils/ThreadPool.h>
 #include <port/Callbacks.h>
 
+#include <utils/Mutex.h>
+#include <utils/Condition.h>
+
 #include <pdu.h>
 
 #include <MonitorUnit.h>
@@ -95,6 +98,8 @@ private:
     //pdu::ProtocolType pType_;
 
     map<string, boost::shared_ptr<MonitorUnit> > monitorUnitList_;
+    mutable MutexLock processMutex_;
+    Condition processPending_;
 };
 }
 }

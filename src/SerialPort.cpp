@@ -31,6 +31,7 @@ SerialPort::SerialPort(EventLoop* loop, string name, string portname, string bau
       loop_(loop),
       threadPool_(new ThreadPool("thread" + name)),
       started_(false),
+      processPending_(processMutex_),
       fd_(-1)
 {
     config_.name_ = name;
@@ -50,6 +51,7 @@ SerialPort::SerialPort(EventLoop* loop, ComConfig config)
       loop_(loop),
       threadPool_(new ThreadPool("thread" + name_)),
       started_(false),
+      processPending_(processMutex_),
       fd_(-1)
 {
 
@@ -121,6 +123,7 @@ void SerialPort::listen()
         if (n > 0)
         {
             LOG_INFO << "Receive " << n << " bytes data";
+            processPending_.notify();
         }
 
         n = 0;
@@ -144,6 +147,13 @@ void SerialPort::release()
 
 void SerialPort::onQueryDataTimer(int interval)
 {
+    list<boost::shared_ptr<MonitorUnit> > monitorUnits = getMonitorsByInterval(interval);
+    list<boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+
+    for (itr = monitorUnits.begin(); itr != monitorUnits.end(); itr++)
+    {
+        
+    }
     //TODO:
     // <TimerID, <ID, type>>,
 
