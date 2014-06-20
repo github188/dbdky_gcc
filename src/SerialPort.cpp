@@ -17,6 +17,8 @@
 
 #include <utility>
 
+#include "CodecFactory.h"
+
 using namespace std;
 
 
@@ -152,7 +154,8 @@ void SerialPort::onQueryDataTimer(int interval)
 
     for (itr = monitorUnits.begin(); itr != monitorUnits.end(); itr++)
     {
-        
+        CodecBase* pcodec = CodecFactory::getInstance()->getCodec((*itr)->getProtocolName());
+
     }
     //TODO:
     // <TimerID, <ID, type>>,

@@ -4,6 +4,10 @@
 #include "CodecBase.h"
 #include "pdu.h"
 
+#include <string>
+
+using namespace std;
+
 namespace dbdky
 {
 namespace gcc
@@ -11,13 +15,17 @@ namespace gcc
 class CodecFactory
 {
 public:
-	static CodecFactory* getInstance();
-	CodecFactory(){}
-	CodecBase* getCodec(pdu::ProtocolType type = pdu::kUnknown);
+	static CodecFactory* getInstance(string codecpath="");
+	CodecFactory(string codecpath)
+	  : codecpath_(codecpath)
+	  {
+
+	  }
+	CodecBase* getCodec(string protocolname);
 
 private:
 	static CodecFactory* instance_;
-
+    string codecpath_;
 };
 }
 }

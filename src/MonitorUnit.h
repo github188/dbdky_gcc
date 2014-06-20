@@ -32,6 +32,11 @@ public:
 		return interval_;
 	}
 
+	string getProtocolName() const
+	{
+		return protocolname_;
+	}
+
 private:
 	string name_;
 	string interval_;
