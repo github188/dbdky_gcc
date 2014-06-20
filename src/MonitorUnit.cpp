@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <utils/Logging.h>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
@@ -79,6 +80,32 @@ namespace gcc
 	 	{
 	 		itr->second->dumpInfo();
 	 	}
+	}
+
+	map<string, float> MonitorUnit::getParamConfigList() const
+	{
+		map<string, float> ret;
+
+		map<string, boost::shared_ptr<MeasurePoint> >::const_iterator itr;
+		for (itr = measurePointList_.begin(); itr != measurePointList_.end(); itr++)
+		{
+			map<string, boost::shared_ptr<Param> >::const_iterator itr1;
+			for (itr1 = itr->second->getParamList().begin(); itr1 != itr->second->getParamList().end(); itr1++)
+			{
+				try
+				{
+					float precision = boost::lexical_cast<float>(itr1->second->precision_);
+					ret[itr1->second->name_] = precision;
+				}
+				catch (boost::bad_lexical_cast& e)
+				{
+					continue;
+				}
+
+			}
+		}
+
+		return ret;
 	}
 }
 }

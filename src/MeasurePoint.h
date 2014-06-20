@@ -28,6 +28,11 @@ public:
 	void insertParam(Param& param);
 
 	void dumpInfo() const;
+
+	map<string, boost::shared_ptr<Param> >& getParamList()
+	{
+		return paramList_;
+	}
 	
 private:
 	string deviceid_;

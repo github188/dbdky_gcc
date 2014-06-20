@@ -5,6 +5,9 @@
 #include "pdu.h"
 
 #include <string>
+#include <map>
+#include <boost/shared_ptr.hpp>
+
 
 using namespace std;
 
@@ -15,17 +18,15 @@ namespace gcc
 class CodecFactory
 {
 public:
-	static CodecFactory* getInstance(string codecpath="");
-	CodecFactory(string codecpath)
-	  : codecpath_(codecpath)
-	  {
-
-	  }
+	typedef dbdky::gcc::CodecBase* (*GetInstanceFuncPtr) ();
+	
+	static CodecFactory* getInstance();
 	CodecBase* getCodec(string protocolname);
 
 private:
+	CodecFactory();
 	static CodecFactory* instance_;
-    string codecpath_;
+	map<string, boost::shared_ptr<CodecBase> > codecList_;
 };
 }
 }

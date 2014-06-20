@@ -37,6 +37,13 @@ public:
 		return protocolname_;
 	}
 
+	map<string, float> getParamConfigList() const;
+
+	string getMac() const
+	{
+		return mac_;
+	}
+
 private:
 	string name_;
 	string interval_;

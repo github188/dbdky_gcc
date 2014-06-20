@@ -155,8 +155,40 @@ void SerialPort::onQueryDataTimer(int interval)
     for (itr = monitorUnits.begin(); itr != monitorUnits.end(); itr++)
     {
         CodecBase* pcodec = CodecFactory::getInstance()->getCodec((*itr)->getProtocolName());
+        if (NULL == pcodec)
+        {
+            LOG_ERROR << "Cannot fetch codec";
+            continue;
+        }
+
+        unsigned char codedata[14];
+        int len = 14;
+        int mac;
+        try
+        {
+            mac = boost::lexical_cast<int>((*itr)->getMac());
+        }
+        catch (boost::bad_lexical_cast& e)
+        {
+            LOG_ERROR << "Get Mac id failed";
+            continue;
+        }
+
+        if (!pcodec->makeQueryCmd(mac, codedata, len))
+        {
+            LOG_ERROR << "makeQueryCmd failed";
+            continue;
+        }
+
+        //WaitForSeconds
+
+        map<string, float> paraPair = (*itr)->getParamConfigList();
+
+        pcodec->setConfig(paraPair);
+
 
     }
+
     //TODO:
     // <TimerID, <ID, type>>,
 

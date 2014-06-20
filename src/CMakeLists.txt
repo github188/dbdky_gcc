@@ -26,5 +26,5 @@ set(com_service_SRCS
   )
 
 add_executable(dbdky_gcc ${com_service_SRCS})
-target_link_libraries(dbdky_gcc confutil tinyxml port utils)
+target_link_libraries(dbdky_gcc confutil tinyxml port utils dl)
 install(TARGETS dbdky_gcc DESTINATION bin)
