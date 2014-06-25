@@ -375,7 +375,7 @@ namespace gcc
        
        
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
-       strcpy(pInsertRecord->lnInstArray[ 0 ] ,lnInst_);
+       strcpy(pInsertRecord->lnInstArray[ 0 ] ,lnInst_.c_str());
 
        pInsertRecord->lnIDArraySize = 1;
        pInsertRecord->paramSize = 5;

@@ -185,7 +185,7 @@ void SerialPort::onQueryDataTimer(int interval)
         }
 
         map<string, float> paraPair = (*itr)->getParamConfigList();
-        codec_->setConfig(paraPair);
+        codec_->setConfig((*itr)->getName(), paraPair);
 
         unsigned char codedata[14];
         int len = 14;

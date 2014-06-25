@@ -44,6 +44,11 @@ public:
 		return mac_;
 	}
 
+    string getName() const
+    {
+    	return name_;
+    }
+    
 private:
 	string name_;
 	string interval_;

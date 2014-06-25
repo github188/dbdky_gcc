@@ -332,7 +332,7 @@ namespace gcc
        sprintf(strAmp,"%f",fAmp);
            
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
-       strcpy(pInsertRecord->lnInstArray[0] ,lnInst_);
+       strcpy(pInsertRecord->lnInstArray[0] ,lnInst_.c_str());
        strcpy(pInsertRecord->repID,"COMDATA/DATASET");
 
        pInsertRecord->lnIDArraySize = 1;
