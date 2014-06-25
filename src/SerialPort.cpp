@@ -34,7 +34,8 @@ SerialPort::SerialPort(EventLoop* loop, string name, string portname, string bau
       threadPool_(new ThreadPool("thread" + name)),
       started_(false),
       processPending_(processMutex_),
-      fd_(-1)
+      fd_(-1),
+      codec_(NULL)
 {
     config_.name_ = name;
     config_.desc_ = "";
@@ -54,7 +55,8 @@ SerialPort::SerialPort(EventLoop* loop, ComConfig config)
       threadPool_(new ThreadPool("thread" + name_)),
       started_(false),
       processPending_(processMutex_),
-      fd_(-1)
+      fd_(-1),
+      codec_(NULL)
 {
 
 }
@@ -118,6 +120,7 @@ void SerialPort::listen()
     char read_buf[4096];
     int n;
     bzero(read_buf, sizeof(read_buf));
+    CodecBase* pcodec = NULL;
 
     while(1)
     {
@@ -126,6 +129,23 @@ void SerialPort::listen()
         {
             LOG_INFO << "Receive " << n << " bytes data";
             processPending_.notify();
+
+            {
+                MutexLockGuard lock(mutex_);
+                pcodec = codec_;
+            }
+
+            if (NULL == pcodec)
+            {
+                LOG_ERROR << "No codec specified";
+                n = 0;
+                ::bzero(read_buf, sizeof(read_buf));
+                continue;
+            }
+
+            //TODO:
+            //1. Call parser:
+            //2. Insert the data into database.
         }
 
         n = 0;
@@ -154,12 +174,18 @@ void SerialPort::onQueryDataTimer(int interval)
 
     for (itr = monitorUnits.begin(); itr != monitorUnits.end(); itr++)
     {
-        CodecBase* pcodec = CodecFactory::getInstance()->getCodec((*itr)->getProtocolName());
-        if (NULL == pcodec)
         {
-            LOG_ERROR << "Cannot fetch codec";
-            continue;
+            MutexLockGuard lock(mutex_);
+            codec_ = CodecFactory::getInstance()->getCodec((*itr)->getProtocolName());
+            if (NULL == codec_)
+            {
+                LOG_ERROR << "Cannot fetch codec";
+                continue;
+            }  
         }
+
+        map<string, float> paraPair = (*itr)->getParamConfigList();
+        codec_->setConfig(paraPair);
 
         unsigned char codedata[14];
         int len = 14;
@@ -174,41 +200,19 @@ void SerialPort::onQueryDataTimer(int interval)
             continue;
         }
 
-        if (!pcodec->makeQueryCmd(mac, codedata, len))
+        if (!codec_->makeQueryCmd(mac, codedata, len))
         {
             LOG_ERROR << "makeQueryCmd failed";
             continue;
         }
 
-        //WaitForSeconds
+        if (!processPending_.waitForSeconds(5))
+        {
+            LOG_ERROR << "op pending timeout";
+        }
 
-        map<string, float> paraPair = (*itr)->getParamConfigList();
-
-        pcodec->setConfig(paraPair);
-
-
+        ::write(fd_, codedata, len);
     }
-
-    //TODO:
-    // <TimerID, <ID, type>>,
-
-    // tmpType = getTypeFromTimerID();
-    // codec = CodecFactory->getInstance()->getCodec()
-    // char* cmd = codec->makeQueryCmd();
-    // //Busy wait.
-    // //Timeout
-
-    // ::write(fd_, cmd, len);
-
-    // ::read(fd_, )
-    // Buffer buf;
-
-    // bool stru, codec->parse(buf->peek())
-
-    // call yumiao's interface
-
-    // runInThread()
-
 }
 
 int SerialPort::init()

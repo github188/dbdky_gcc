@@ -20,7 +20,7 @@
 #include <pdu.h>
 
 #include <MonitorUnit.h>
-
+#include "CodecBase.h"
 
 using namespace std;
 using namespace dbdky;
@@ -100,6 +100,8 @@ private:
     map<string, boost::shared_ptr<MonitorUnit> > monitorUnitList_;
     mutable MutexLock processMutex_;
     Condition processPending_;
+    mutable MutexLock mutex_;
+    CodecBase* codec_;
 };
 }
 }
