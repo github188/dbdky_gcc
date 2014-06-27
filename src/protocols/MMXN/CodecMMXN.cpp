@@ -52,7 +52,14 @@ namespace gcc
       
        return (uchCRCHi << 8 | uchCRCLo) ; 
     }
-
+	int CodecMMXN::setConfig(const std::string lnInst,const std::map<std::string,float> & params_prop)
+	{
+		for(std::map<std::string,float>::const_iterator it = params_prop.begin();it != params_prop.end();it++ )
+		{
+			m_param_precisions[it->first] = it->second;
+		}
+		lnInst_ = lnInst;
+	}
     int CodecMMXN::makeYearMonthCmd( unsigned char id, unsigned char * codedata, int & len)
 	{
 	       //get current time
@@ -237,7 +244,7 @@ namespace gcc
        return 1;	
     }
 
-    int CodecMMXN::parser( const unsigned char * buffer, const int len, char *lnInst,void * out)
+    int CodecMMXN::parser( const unsigned char * buffer, const int len,void * out)
     {
        //filter data
        pRECMMXN pRs485Data;
@@ -325,7 +332,7 @@ namespace gcc
        sprintf(strAmp,"%f",fAmp);
            
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
-       strcpy(pInsertRecord->lnInstArray[0] ,lnInst);
+       strcpy(pInsertRecord->lnInstArray[0] ,lnInst_);
        strcpy(pInsertRecord->repID,"COMDATA/DATASET");
 
        pInsertRecord->lnIDArraySize = 1;

@@ -45,7 +45,14 @@ namespace gcc
       
        return (uchCRCHi << 8 | uchCRCLo) ; 
     }
-
+	int CodecZSAR::setConfig(const std::string lnInst,const std::map<std::string,float> & params_prop)
+	{
+		for(std::map<std::string,float>::const_iterator it = params_prop.begin();it != params_prop.end();it++ )
+		{
+			m_param_precisions[it->first] = it->second;
+		}
+		lnInst_ = lnInst;
+	}
 	int CodecZSAR::makeYearMonthCmd( unsigned char id, unsigned char * codedata, int & len)
 	{
 	       //get current time
@@ -224,7 +231,7 @@ namespace gcc
        return 1;	
     }
 
-    int CodecZSAR::parser( const unsigned char * buffer,const int len, char *lnInst,void * out)
+    int CodecZSAR::parser( const unsigned char * buffer,const int len, void * out)
     {
        //filter data
        pRECZSAR pRs485Data = NULL;
@@ -243,35 +250,37 @@ namespace gcc
            return 0;
 	   }
        
-	   memcpy( data, pRs485Data->dat,pRs485Data->length );
+	   //skip two bytes of warning flag
+	   memcpy( data, pRs485Data->dat + 2, pRs485Data->length - 2 );
 
        //get parameter  the order rely on xml config file
        memset(&tmp,0,sizeof(tm));
-       
-       sprintf(strTmDat,"20%02X",data[nPDUIndex++]);
+
+       sprintf(strTmDat,"20%02d",data[nPDUIndex++]);
        tmp.tm_year = atoi(strTmDat) - 1900;
        
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_mon = atoi(strTmDat) - 1;
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_mday = atoi(strTmDat);
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_hour = atoi(strTmDat);
    
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_min = atoi(strTmDat);
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_sec = atoi(strTmDat);
+
        //get IEC 61850 format data
 
        time_t smpTm64 = 0;
-       char strSmpTm[64] = {0};
+       char strSmpTm[32] = {0};
        smpTm64 = mktime(&tmp);
         
-       sprintf(strSmpTm,"%d",(int)smpTm64 + 8*60*60);
+       sprintf(strSmpTm,"%d",(int)smpTm64);
        //_ltoa(smpTm64,smpTm,10);
 
        //(1)TotA : -----------------------------
@@ -294,7 +303,7 @@ namespace gcc
 	   {
            fTotA = (totaData * fTotAPrecision);       
        }
-       char strTotA[128] = {0};
+       char strTotA[32] = {0};
        sprintf(strTotA,"%f",fTotA);
 
        //(2)RisA : -----------------------------
@@ -318,7 +327,7 @@ namespace gcc
            fRisA = (risaData * fRisAprecision);
 	   }       
        
-       char strRisA[128] = {0};
+       char strRisA[32] = {0};
        sprintf(strRisA,"%f",fRisA);
        
         //(3)OpCnt : -----------------------------
@@ -329,49 +338,54 @@ namespace gcc
        int nOpCnt = 0; 
        nOpCnt = (int)optcntData;       
        
-       char strOptCnt[128] = {0};
+       char strOptCnt[32] = {0};
        sprintf(strOptCnt,"%d",nOpCnt);
 
        //(4)LastOpTm : -----------------------------       
        memset(&tmp,0,sizeof(tm));
        
-       sprintf(strTmDat,"20%02X",data[nPDUIndex++]);
+       sprintf(strTmDat,"20%02d",data[nPDUIndex++]);
        tmp.tm_year = atoi(strTmDat) - 1900;
        
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_mon = atoi(strTmDat) - 1;
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_mday = atoi(strTmDat);
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_hour = atoi(strTmDat);
    
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_min = atoi(strTmDat);
 
-       sprintf(strTmDat,"%X",data[nPDUIndex++]);
+       sprintf(strTmDat,"%d",data[nPDUIndex++]);
        tmp.tm_sec = atoi(strTmDat);
 
        time_t lastOpTm64 = 0;
-       char strLastOpTm[64] = {0};
+       char strLastOpTm[32] = {0};
        lastOpTm64 = mktime(&tmp);
-        
-       sprintf(strLastOpTm,"%d",(int)lastOpTm64 + 8*60*60);
+	   int nLastOpTm = (int)lastOpTm64;
+       
+	   if((int)lastOpTm64 == -1)
+	   {
+	       nLastOpTm = 0;
+	   }
+       sprintf(strLastOpTm,"%d",nLastOpTm);
        
        
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
-       strcpy(pInsertRecord->lnInstArray[ 0 ] ,lnInst);
+       strcpy(pInsertRecord->lnInstArray[ 0 ] ,lnInst_);
 
        pInsertRecord->lnIDArraySize = 1;
        pInsertRecord->paramSize = 5;
 
-       //data
-       strcpy(pInsertRecord->dataArray[0], strSmpTm);
-       strcpy(pInsertRecord->dataArray[1], strTotA);
-       strcpy(pInsertRecord->dataArray[2], strRisA);
-       strcpy(pInsertRecord->dataArray[3], strOptCnt);
-       strcpy(pInsertRecord->dataArray[4], strLastOpTm);
+       //filed
+       strcpy(pInsertRecord->fieldArray[0] , "SmpTm");   
+       strcpy(pInsertRecord->fieldArray[1] , "TotA");   
+       strcpy(pInsertRecord->fieldArray[2] , "RisA"); 
+       strcpy(pInsertRecord->fieldArray[3] , "OpCnt"); 
+	   strcpy(pInsertRecord->fieldArray[4] , "LastOpTm");
 
        //type
        pInsertRecord->typeArray[0] = TYPEUTC;
@@ -380,20 +394,12 @@ namespace gcc
        pInsertRecord->typeArray[3] = TYPEINTEGER;
        pInsertRecord->typeArray[4] = TYPEUTC;
 
-       //filed
-       strcpy(pInsertRecord->fieldArray[0] , "SmpTm");
-       strcpy(pInsertRecord->fieldArray[1] , "TotA");
-       strcpy(pInsertRecord->fieldArray[2] , "RisA");
-       strcpy(pInsertRecord->fieldArray[3] , "OpCnt");
-       strcpy(pInsertRecord->fieldArray[4] , "LastOpTm");
+	   //data
+       strcpy(pInsertRecord->dataArray[0], strSmpTm);
+       strcpy(pInsertRecord->dataArray[1], strTotA);
+       strcpy(pInsertRecord->dataArray[2], strRisA);
+       strcpy(pInsertRecord->dataArray[3], strOptCnt);
+	   strcpy(pInsertRecord->dataArray[4], strLastOpTm);
     }
-
-  int CodecZSAR::setConfig(const std::map<std::string,float> & params_prop)
-  {
-    for(std::map<std::string,float>::const_iterator it = params_prop.begin();it != params_prop.end();it++ )
-    {
-      m_param_precisions[it->first] = it->second;
-    }
-  }
 }
 }

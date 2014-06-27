@@ -21,12 +21,13 @@ public:
 
 	int makeQueryCmd( unsigned char id ,unsigned char * codedata,int & len );
 
-	int parser( const unsigned char *buffer,const int len, char * lnInst, void * out );
+	int parser( const unsigned char *buffer,const int len, void * out );
 
-	int setConfig(const std::map<std::string,float> & params_prop);
+	int setConfig(const std::string lnInst,const std::map<std::string,float> & params_prop);
 	
 public:
     std::map<std::string,float> m_param_precisions;
+    std::string lnInst_;
 };
 }
 }

@@ -30,8 +30,6 @@ namespace gcc
 class CodecBase
 {
 public:
-        //get <paramName,precision> pair
-	virtual int setConfig(const std::map<std::string,float> & params_prop) = 0;
 	//Set Year&month
 	virtual int makeYearMonthCmd( unsigned char id, unsigned char * codedata, int & len) = 0;
 	//Set Day&hour
@@ -40,13 +38,12 @@ public:
 	virtual int makeMinSecCmd( unsigned char id, unsigned char * codedata, int & len) = 0;
 	//Not used
 	virtual int makeThetimeCmd( unsigned char id, unsigned char * codedata, int & len ) = 0;
-        // protocol code from parameter to code buffer
+    // protocol code from parameter to code buffer
 	virtual int makeQueryCmd( unsigned char id /* mac id 'Hex' Value*/,unsigned char *codedata,int &len ) = 0;
 	// protocol decode from protocol response data to <parameter,value> pair list
-	virtual int parser(const unsigned char *buffer,const int len,char * lnInst,/* RS485 return data*/ void* out ) = 0;
-
-public:
-    std::map<std::string,float> m_param_precisions;
+	virtual int parser(const unsigned char *buffer,const int len,/* RS485 return data*/ void* out ) = 0;
+	// config interface
+	virtual int setConfig(const std::string lnInst,const std::map<std::string,float> & params_prop) = 0;
 };
 }
 }
