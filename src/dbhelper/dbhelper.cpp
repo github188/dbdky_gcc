@@ -125,7 +125,7 @@ boost::shared_ptr<ResultSet> DBHelper::query(const string& sqlstr)
     boost::shared_ptr<ResultSet> result;
     try 
     {
-        ResultSet* res = statement_->executeQuery(sqlstr.c_str());
+        //ResultSet* res = statement_->executeQuery(sqlstr.c_str());
         result.reset(statement_->executeQuery(sqlstr.c_str()));
       
         {
