@@ -226,10 +226,10 @@ namespace gcc
        unsigned short uCRC;
        uCRC = CRC16( out, 6 );
        out[6] = (unsigned char) ( uCRC >> 8);
-       out[7] = (unsigned char) ( uCRC );
+       out[7] = (unsigned char) ( uCRC );    
 
-       len = 8;    
-
+       len = 8;
+       
        return 1;	
     }
 

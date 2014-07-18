@@ -9,8 +9,6 @@ using namespace::dbdky::gcc;
 
 int main(int argc, char** argv)
 {
-	LOG_INFO << "pid = " << getpid();
-
 	EventLoop loop;
 
 	com_service server(&loop, "gcc");

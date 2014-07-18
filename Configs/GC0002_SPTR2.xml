@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="gbk" ?>
 <package>
    <RS485 name="RS485A" desc="RS485串行总线">
-    <PortName>COM1</PortName>
+    <PortName>/dev/ttyS0</PortName>
     <BaudRate>9600</BaudRate>
     <DataBits>8</DataBits>
     <StopBits>1</StopBits>

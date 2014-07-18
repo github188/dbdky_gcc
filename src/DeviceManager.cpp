@@ -21,12 +21,12 @@ namespace gcc
 	DeviceManager* DeviceManager::instance_ = NULL;
 	DeviceManager* DeviceManager::getInstance(EventLoop* loop)
 	{
-		  if (!instance_)
-		  {
-			   instance_ = new DeviceManager(loop);;
-		  }
+		if (!instance_)
+		{
+			instance_ = new DeviceManager(loop);
+		}
 
-		  return instance_;
+		return instance_;
 	}
 
 	DeviceManager::DeviceManager(EventLoop* loop, string deviceTotalName, string deviceConfigPath)
@@ -224,8 +224,11 @@ namespace gcc
 
                     return;
                 }
+                nodelevel4 = nodelevel4->NextSibling();
+             
 
             }
+            nodelevel3 = nodelevel3->NextSibling();
         }
        
 
@@ -424,8 +427,8 @@ namespace gcc
                     string pointIEDName = elelevel2->Attribute("IEDName");
                     string pointid = elelevel2->Attribute("id");
                     string pointchecktime = elelevel2->Attribute("checktime");
-
-                    MonitorUnit* pUnit = pPort->getMonitorUnitByName(monitorUnitName);
+                    string tmpKey = monitorProtocolName + monitorUnitMac;
+                    MonitorUnit* pUnit = pPort->getMonitorUnitByName(tmpKey);
                     if (!pUnit)
                     {
                         nodelevel2 = nodelevel2->NextSibling();
@@ -452,16 +455,15 @@ namespace gcc
                             nodelevel3 = nodelevel3->NextSibling();
                             continue;
                         }
-
                         string paramName = elelevel3->Attribute("name");
                         Param tmpParam(paramName);
+        
                         getFullParams(pointDeviceid, pointid, paramName, tmpParam);
                         MeasurePoint* pMeasurePoint = pUnit->getMeasurePointByDeviceid(pointDeviceid);
                         if (pMeasurePoint)
                         {
                             pMeasurePoint->insertParam(tmpParam);
                         }
-
                         nodelevel3 = nodelevel3->NextSibling();
                     }
 

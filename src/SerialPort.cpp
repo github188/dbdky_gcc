@@ -117,6 +117,7 @@ void SerialPort::start()
 
 void SerialPort::listen()
 {
+    LOG_INFO << "start listen fd=" << fd_;
     char read_buf[4096];
     int n;
     bzero(read_buf, sizeof(read_buf));
@@ -127,9 +128,6 @@ void SerialPort::listen()
         n = ::read(fd_, read_buf, sizeof(read_buf));
         if (n > 0)
         {
-            LOG_INFO << "Receive " << n << " bytes data";
-            processPending_.notify();
-
             {
                 MutexLockGuard lock(mutex_);
                 pcodec = codec_;
@@ -147,7 +145,7 @@ void SerialPort::listen()
             //1. Call parser:
             //2. Insert the data into database.
         }
-
+   
         n = 0;
         bzero(read_buf, sizeof(read_buf));
     }
@@ -169,6 +167,7 @@ void SerialPort::release()
 
 void SerialPort::onQueryDataTimer(int interval)
 {
+    LOG_INFO << "onQueryDataTimer: interval[" << interval << "]";
     list<boost::shared_ptr<MonitorUnit> > monitorUnits = getMonitorsByInterval(interval);
     list<boost::shared_ptr<MonitorUnit> >::const_iterator itr;
 
@@ -206,12 +205,24 @@ void SerialPort::onQueryDataTimer(int interval)
             continue;
         }
 
-        if (!processPending_.waitForSeconds(5))
-        {
-            LOG_ERROR << "op pending timeout";
-        }
+        //if (!processPending_.waitForSeconds(5))
+        //{
+        //    LOG_ERROR << "op pending timeout";
+        //    return;
+        //}
+        //else
+        //{
+        //    LOG_INFO << "get processPending_";
+        //}
 
-        ::write(fd_, codedata, len);
+        LOG_INFO << "will Write: " << len << " Bytes to COM";
+        for (int tt = 0; tt < len; tt++)
+        {
+            printf("0x%02X ", codedata[tt]);
+        }
+        int n = ::write(fd_, codedata, len);
+   
+        //processPending_.notify();
     }
 }
 
@@ -233,6 +244,7 @@ int SerialPort::init()
     }    
     
     ::tcgetattr(fd_, &opt);
+    ::tcflush(fd_, TCIOFLUSH);
     ::cfsetispeed(&opt, B9600);
     ::cfsetospeed(&opt, B9600);
     
@@ -246,7 +258,7 @@ int SerialPort::init()
     opt.c_cflag |= CS8;
     opt.c_cflag &= ~CSTOPB;
     opt.c_cflag &= ~PARENB;
-    opt.c_cflag &= ~INPCK;
+    opt.c_iflag &= ~INPCK;
     opt.c_cflag |= (CLOCAL | CREAD);
 
     opt.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
@@ -256,11 +268,10 @@ int SerialPort::init()
 
     opt.c_iflag &= ~(ICRNL | INLCR);
     opt.c_iflag &= ~(IXON | IXOFF | IXANY);
-
+    
+    ::tcflush(fd_, TCIFLUSH);
     opt.c_cc[VTIME] = 0;
     opt.c_cc[VMIN] = 0;
-
-    ::tcflush(fd_, TCIOFLUSH);
 
     LOG_INFO << "Configure complete";
 
@@ -282,13 +293,14 @@ _fail:
 void SerialPort::insertMonitorUnit(string name, string interval, string protocolname, 
     string mac, string manufacturer, string cycleid, string ytime)
 {
-    if (name.empty())
+    if (name.empty() || protocolname.empty() || mac.empty())
     {
         return;
     }
 
+    string keyname = protocolname + mac;
     map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
-    itr = monitorUnitList_.find(name);
+    itr = monitorUnitList_.find(keyname);
     if (monitorUnitList_.end() != itr)
     {
         return;
@@ -298,7 +310,7 @@ void SerialPort::insertMonitorUnit(string name, string interval, string protocol
     boost::shared_ptr<MonitorUnit> monitorunit(
          new MonitorUnit(name, interval, protocolname, mac, manufacturer, cycleid, ytime));
 
-    monitorUnitList_.insert(make_pair<string, boost::shared_ptr<MonitorUnit> >(name, monitorunit));
+    monitorUnitList_.insert(make_pair<string, boost::shared_ptr<MonitorUnit> >(keyname, monitorunit));
 }
 
 MonitorUnit* SerialPort::getMonitorUnitByName(string name)
@@ -349,6 +361,7 @@ void SerialPort::dumpMonitorUnitInfo() const
         list<int> intervals;
 
         map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+        LOG_INFO << "***Monitor Counts: " << monitorUnitList_.size();
         for (itr = monitorUnitList_.begin(); itr != monitorUnitList_.end(); itr++)
         {
             if (!itr->second)
@@ -376,6 +389,7 @@ void SerialPort::dumpMonitorUnitInfo() const
         list<int>::const_iterator itr1;
         for (itr1 = intervals.begin(); itr1 != intervals.end(); itr1++)
         {
+            LOG_INFO << "start timer :" << (*itr1)/1000;
             double timeinterval = (*itr1)/1000;
             TimerId id = loop_->runEvery(timeinterval,
                 boost::bind(&SerialPort::onQueryDataTimer, this, *itr1));
