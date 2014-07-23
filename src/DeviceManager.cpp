@@ -277,6 +277,7 @@ namespace gcc
     	{
     		string filename = filepath1 + *itr;
     		TiXmlDocument doc(filename);
+       
     		TiXmlNode* node = NULL;
     		TiXmlNode* inside = NULL;
     		TiXmlElement* element = NULL;
@@ -381,7 +382,6 @@ namespace gcc
                     inside = inside->NextSibling();
                     continue;
                 }
-
                 string monitorUnitName = unit->Attribute("name");
                 string monitorUnitInterval = unit->Attribute("interval");
                 string monitorProtocolName = unit->Attribute("protocolname");

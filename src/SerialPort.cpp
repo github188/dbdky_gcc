@@ -118,16 +118,18 @@ void SerialPort::start()
 void SerialPort::listen()
 {
     LOG_INFO << "start listen fd=" << fd_;
-    char read_buf[4096];
+    unsigned char read_buf[256];
     int n;
     bzero(read_buf, sizeof(read_buf));
     CodecBase* pcodec = NULL;
 
     while(1)
     {
-        n = ::read(fd_, read_buf, sizeof(read_buf));
-        if (n > 0)
+        int tmp;
+        tmp = ::read(fd_, read_buf + n, sizeof(read_buf));
+        if (tmp > 0)
         {
+            n += tmp;
             {
                 MutexLockGuard lock(mutex_);
                 pcodec = codec_;
@@ -141,13 +143,29 @@ void SerialPort::listen()
                 continue;
             }
 
-            //TODO:
-            //1. Call parser:
-            //2. Insert the data into database.
+            dbdky::gcc::DB_INSERT_DATATYPE out;
+            int retcode = pcodec->parser(read_buf, n, (void *)&out);
+            if (dbdky::gcc::PARSE_SUCCESS == retcode)
+            {
+                LOG_INFO << "Parser OK";
+                n = 0;
+                //
+
+                ::bzero(read_buf, sizeof(read_buf));
+            }
+            else if (dbdky::gcc::PARSE_ERROR_LENGTH_SHORT == retcode)
+            {
+                LOG_ERROR << "Length Short";
+            }
+            else
+            {
+                n = 0; 
+                bzero(read_buf, sizeof(read_buf));
+            }
+
+
         }
    
-        n = 0;
-        bzero(read_buf, sizeof(read_buf));
     }
 }
 

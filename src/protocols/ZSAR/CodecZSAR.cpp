@@ -236,6 +236,13 @@ namespace gcc
     int CodecZSAR::parser( const unsigned char * buffer,const int len, void * out)
     {
        //filter data
+       //Merge from Yandan, begin
+       if (len < 25)
+       {
+           return PARSE_ERROR_LENGTH_SHORT;
+       }
+       //Merge from Yandan, end
+       
        pRECZSAR pRs485Data = NULL;
        unsigned char data[128] = {0};
        char strTmDat[32] = {0};
@@ -245,11 +252,11 @@ namespace gcc
        
 	   if(NULL == pRs485Data)
 	   {
-	       return 0;
+	       return PARSE_ERROR_OTHER;
 	   }
        if( pRs485Data->length > 128 )
 	   {
-           return 0;
+           return PARSE_ERROR_OTHER;
 	   }
        
 	   //skip two bytes of warning flag
@@ -402,6 +409,8 @@ namespace gcc
        strcpy(pInsertRecord->dataArray[2], strRisA);
        strcpy(pInsertRecord->dataArray[3], strOptCnt);
 	   strcpy(pInsertRecord->dataArray[4], strLastOpTm);
+
+     return PARSE_SUCCESS;
     }
 }
 }

@@ -26,6 +26,11 @@ namespace gcc
      char fieldArray[MAXITEMSIZE][IEC61850MODELLEN];
      int  paramSize;
    }; 
+   enum{
+      PARSE_SUCCESS = 0,
+      PARSE_ERROR_LENGTH_SHORT = 1,
+      PARSE_ERROR_OTHER = 3  
+    };
 
 class CodecBase
 {

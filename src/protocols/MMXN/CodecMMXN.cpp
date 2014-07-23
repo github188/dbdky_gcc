@@ -247,6 +247,13 @@ namespace gcc
     int CodecMMXN::parser( const unsigned char * buffer, const int len,void * out)
     {
        //filter data
+       //Merge from Yandan, begin
+       if (len < 21)
+       {
+           return PARSE_ERROR_LENGTH_SHORT;
+       }
+       //Merge from Yandan, end
+
        pRECMMXN pRs485Data;
        unsigned char data[MMXN_DATA_MAX_LEN];
        char strTmDat[32];
@@ -258,6 +265,12 @@ namespace gcc
        if( pRs485Data->length > MMXN_DATA_MAX_LEN )
           return 0;
 
+      //Merge from Yandan, begin
+       if (pRs485Data->length > MMXN_DATA_MAX_LEN)
+        {
+            return PARSE_ERROR_OTHER;
+        }
+      //Merge from Yandan, end
        memcpy( data, pRs485Data->dat,pRs485Data->length );
        
        //get parameter  the order rely on xml config file
@@ -346,6 +359,8 @@ namespace gcc
 
        strcpy( pInsertRecord->fieldArray[0], "SmpTm" );
        strcpy( pInsertRecord->fieldArray[1], "Amp" );
+
+       return PARSE_SUCCESS;
     }
   }
 }
