@@ -15,11 +15,101 @@
 #include <termios.h>
 #include <errno.h>
 
+#include <dlfcn.h>
+#include <dirent.h>
+
 #include <utility>
 
 #include "CodecFactory.h"
 
 using namespace std;
+
+namespace dbdky
+{
+namespace detail
+{
+extern string getFullPath();
+}
+}
+
+#if 0
+namespace dbdky
+{
+namespace detail
+{
+string getFullPath()
+    {   
+        char current_abs_path[1024];
+        int count;
+
+        count = ::readlink("/proc/self/exe", current_abs_path, 1024);
+        if (count < 0 || count >= 1024)
+        {
+            LOG_ERROR << "Get ABS PATH ERROR";
+            return "";
+        }
+
+        current_abs_path[count] = '\0';
+
+        string filepath(current_abs_path);
+        int st = filepath.rfind("dbdky_gcc");
+        if (st == string::npos)
+        {
+            LOG_ERROR << "GET ABS PATH ERROR:1";
+            return "";
+        }
+
+        string filepath1 = filepath.substr(0, st);
+        return filepath1;
+    }
+
+    list<string> getCodecLibraries()
+    {
+        list<string> ret;
+        string currentpath = getFullPath();
+
+        DIR *dp;
+        struct dirent *entry;
+        struct stat statbuf;
+        if ((dp = ::opendir(currentpath.c_str())) == NULL)
+        {
+            LOG_ERROR << "Cannot open directory: " << currentpath;
+            return ret;
+        }
+
+        ::chdir(currentpath.c_str());
+
+        while ((entry = ::readdir(dp)) != NULL)
+        {
+            ::lstat(entry->d_name,&statbuf);
+            if (S_ISDIR(statbuf.st_mode))
+            {
+                continue;
+            }
+            else
+            {
+                string filename;
+                filename += entry->d_name;
+
+                if (string::npos != filename.find(".so"))
+                {
+                    ret.push_back(filename);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+      
+        ::chdir("..");
+        ::closedir(dp);
+
+        return ret;
+    }
+}
+}
+#endif
 
 
 namespace dbdky
@@ -35,7 +125,8 @@ SerialPort::SerialPort(EventLoop* loop, string name, string portname, string bau
       started_(false),
       processPending_(processMutex_),
       fd_(-1),
-      codec_(NULL)
+      codec_(NULL),
+      g_StoreDataPtr(NULL)
 {
     config_.name_ = name;
     config_.desc_ = "";
@@ -56,7 +147,8 @@ SerialPort::SerialPort(EventLoop* loop, ComConfig config)
       started_(false),
       processPending_(processMutex_),
       fd_(-1),
-      codec_(NULL)
+      codec_(NULL),
+      g_StoreDataPtr(NULL)
 {
 
 }
@@ -123,6 +215,33 @@ void SerialPort::listen()
     bzero(read_buf, sizeof(read_buf));
     CodecBase* pcodec = NULL;
 
+    if (NULL == g_StoreDataPtr)
+    {
+        string abspath = dbdky::detail::getFullPath();
+        if (abspath.empty())
+        {
+            LOG_ERROR << "Can't find abspath";
+            return;
+        }
+        string libname(abspath);
+        libname += "libServerDataInput.so";
+
+        void * hGetInstanceHandle_DataStore = ::dlopen(libname.c_str(), RTLD_NOW);
+        if (NULL == hGetInstanceHandle_DataStore)
+        {
+            LOG_ERROR << "Can't find Data Input Instance from: " << libname;
+            return;
+        }
+
+        g_StoreDataPtr = (StoreDataFuncPtr)::dlsym(hGetInstanceHandle_DataStore, 
+            "StoreData");
+        if (NULL == g_StoreDataPtr)
+        {
+            LOG_ERROR << "Can't get DataStoreInput interface from: " << libname;
+            return;
+        }
+    }
+
     while(1)
     {
         int tmp;
@@ -162,7 +281,7 @@ void SerialPort::listen()
                 n = 0; 
                 bzero(read_buf, sizeof(read_buf));
             }
-
+            
 
         }
    

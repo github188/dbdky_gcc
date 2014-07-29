@@ -50,6 +50,9 @@ typedef struct ComConfig
 class SerialPort : boost::noncopyable
 {
 public:
+    typedef unsigned char (*StoreDataFuncPtr)(char* repID, char* logicNodeIDArray[],
+        const int logicIDArraySize, char* dataArray[], int typeArray[], char* fieldArray[], const int arraySize);
+
 	//SerialPort(EventLoop* loop, string devicename, uint16_t queryInterval = 5, 
 //		pdu::ProtocolType type=pdu::kUnknown);
     SerialPort(EventLoop* loop, string name, string portname, string baudrate="9600",
@@ -102,6 +105,8 @@ private:
     Condition processPending_;
     mutable MutexLock mutex_;
     CodecBase* codec_;
+
+    StoreDataFuncPtr g_StoreDataPtr;
 };
 }
 }
