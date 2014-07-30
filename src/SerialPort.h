@@ -106,7 +106,7 @@ private:
     mutable MutexLock mutex_;
     CodecBase* codec_;
 
-    StoreDataFuncPtr g_StoreDataPtr;
+    StoreDataFuncPtr storeDataPtr;
 };
 }
 }

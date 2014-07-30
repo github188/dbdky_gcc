@@ -148,7 +148,7 @@ SerialPort::SerialPort(EventLoop* loop, ComConfig config)
       processPending_(processMutex_),
       fd_(-1),
       codec_(NULL),
-      g_StoreDataPtr(NULL)
+      storeDataPtr(NULL)
 {
 
 }
@@ -211,11 +211,15 @@ void SerialPort::listen()
 {
     LOG_INFO << "start listen fd=" << fd_;
     unsigned char read_buf[256];
+	char *dataSetValuePtr[512];
+	int  dataSetTypeINT[512]={0};
+	char *dataSetParamNamePtr[512];
+	char *measurePointArrayPtr[64];
+
     int n;
     bzero(read_buf, sizeof(read_buf));
     CodecBase* pcodec = NULL;
-
-    if (NULL == g_StoreDataPtr)
+    if (NULL == storeDataPtr)
     {
         string abspath = dbdky::detail::getFullPath();
         if (abspath.empty())
@@ -233,9 +237,9 @@ void SerialPort::listen()
             return;
         }
 
-        g_StoreDataPtr = (StoreDataFuncPtr)::dlsym(hGetInstanceHandle_DataStore, 
+        storeDataPtr = (StoreDataFuncPtr)::dlsym(hGetInstanceHandle_DataStore, 
             "StoreData");
-        if (NULL == g_StoreDataPtr)
+        if (NULL == storeDataPtr)
         {
             LOG_ERROR << "Can't get DataStoreInput interface from: " << libname;
             return;
@@ -269,6 +273,35 @@ void SerialPort::listen()
                 LOG_INFO << "Parser OK";
                 n = 0;
                 //
+				dbdky::gcc::DB_INSERT_DATATYPE * p = (dbdky::gcc::DB_INSERT_DATATYPE *) (&out); 
+                LOG_INFO << "| ReportID = " << p->repID << ";";
+
+				int nMesurePointNum = p->lnIDArraySize;
+
+
+				for(int i = 0;i < 64;i++)
+				{
+					measurePointArrayPtr[i] = NULL;
+				}
+				for(int j = 0; j < 512;j++)
+				{
+					dataSetValuePtr[j]     = NULL;
+					dataSetParamNamePtr[j] = NULL;
+				}
+
+				for(i = 0;i < nMesurePointNum;i++)
+				{
+
+				    measurePointArrayPtr[i] = p->lnInstArray[i];
+				    for( int i = 0;i < p->paramSize;i++ )
+                    {
+			            dataSetValuePtr[i] = p->dataArray[i];
+                        dataSetTypeINT[i] = p->typeArray[i];
+                        dataSetParamNamePtr[i] = p->fieldArray[i];
+                    }
+					
+					storeDataPtr(p->repID, measurePointArrayPtr, nMesurePointNum, dataSetValuePtr, dataSetTypeINT, dataSetParamNamePtr, p->paramSize);
+                }
 
                 ::bzero(read_buf, sizeof(read_buf));
             }
@@ -281,7 +314,7 @@ void SerialPort::listen()
                 n = 0; 
                 bzero(read_buf, sizeof(read_buf));
             }
-            
+
 
         }
    
