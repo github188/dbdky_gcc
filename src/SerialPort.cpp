@@ -126,7 +126,7 @@ SerialPort::SerialPort(EventLoop* loop, string name, string portname, string bau
       processPending_(processMutex_),
       fd_(-1),
       codec_(NULL),
-      g_StoreDataPtr(NULL)
+      storeDataPtr(NULL)
 {
     config_.name_ = name;
     config_.desc_ = "";
@@ -289,7 +289,7 @@ void SerialPort::listen()
 					dataSetParamNamePtr[j] = NULL;
 				}
 
-				for(i = 0;i < nMesurePointNum;i++)
+				for(int i = 0;i < nMesurePointNum;i++)
 				{
 
 				    measurePointArrayPtr[i] = p->lnInstArray[i];
