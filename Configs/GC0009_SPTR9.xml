@@ -11,8 +11,8 @@
     <InBufferSize>1024</InBufferSize>
     <OutBufferSize>1024</OutBufferSize>
   </RS485>
-<MonitorUnit name="MU1" interval="7000v" protocolname="MMXN" port="RS485A" manufacturer="neri" cycleid="" mac="5" ytime="1">
-     <MeasurePoint  deviceid="GC0003" IEDName="NEPRI_CMD" id="MMXN3" checktime="">
+<MonitorUnit name="MU1" interval="7000" protocolname="MMXN" port="RS485A" manufacturer="neri" cycleid="" mac="11" ytime="1">
+     <MeasurePoint  deviceid="GC0009" IEDName="NEPRI_CMD" id="MMXN9" checktime="">
   		  <param name="SmpTm" />
      	  <param name="Amp" />
      </MeasurePoint>

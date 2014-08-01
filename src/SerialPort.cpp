@@ -335,6 +335,7 @@ void SerialPort::release()
     }
 }
 
+#if 0
 void SerialPort::onQueryDataTimer(int interval)
 {
     LOG_INFO << "onQueryDataTimer: interval[" << interval << "]";
@@ -402,7 +403,74 @@ void SerialPort::onQueryDataTimer(int interval)
    
         //processPending_.notify();
     }
+
 }
+#else
+void SerialPort::onQueryDataTimer(string monitorUnitName)
+{
+    LOG_INFO << "onQueryDataTimer, MonitorUnit: " << monitorUnitName;
+
+    MonitorUnit* monitorUnit = getMonitorUnitByName(monitorUnitName);
+    if (NULL == monitorUnit)
+    {
+        LOG_ERROR << "No such monitorUnit with name: " << monitorUnitName << " found.";
+        return;
+    }
+
+    {
+        MutexLockGuard lock(mutex_);
+        codec_ = CodecFactory::getInstance()->getCodec(monitorUnit->getProtocolName());
+        if (NULL == codec_)
+        {
+            LOG_ERROR << "Cannot fetch codec";
+            return;
+        }  
+    }
+
+
+	map<string, float> paraPair = monitorUnit->getParamConfigList();
+        
+       // codec_->setConfig((*itr)->getName(), paraPair);
+        MeasurePoint* mp = monitorUnit->getFirstMeasurePoint();
+        if (NULL == mp)
+        {
+            LOG_ERROR << "No measure point under this monitor unit.";
+            return;
+        }
+
+        codec_->setConfig(mp->getId(), paraPair);
+        unsigned char codedata[14];
+        int len = 14;
+        int mac;
+        try
+        {
+            mac = boost::lexical_cast<int>(monitorUnit->getMac());
+        }
+        catch (boost::bad_lexical_cast& e)
+        {
+            LOG_ERROR << "Get Mac id failed";
+            return;
+        }
+
+        if (!codec_->makeQueryCmd(mac, codedata, len))
+        {
+            LOG_ERROR << "makeQueryCmd failed";
+            return;
+        }
+
+        LOG_INFO << "will Write: " << len << " Bytes to COM";
+        for (int tt = 0; tt < len; tt++)
+        {
+            printf("0x%02X ", codedata[tt]);
+        }
+
+        {
+ 	    MutexLockGuard lock(timerHandleMutex_);
+            int n = ::write(fd_, codedata, len);
+        }
+
+}
+#endif
 
 int SerialPort::init()
 {
@@ -536,6 +604,7 @@ void SerialPort::dumpMonitorUnitInfo() const
     void SerialPort::startTimers()
     {
         cancelTimers();
+#if 0
         list<int> intervals;
 
         map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
@@ -573,6 +642,42 @@ void SerialPort::dumpMonitorUnitInfo() const
                 boost::bind(&SerialPort::onQueryDataTimer, this, *itr1));
             timers_.insert(make_pair<int, TimerId>(*itr1, id));
         }
+#endif
+
+        map<string, boost::shared_ptr<MonitorUnit> >::const_iterator itr;
+        for (itr = monitorUnitList_.begin(); 
+		itr != monitorUnitList_.end(); 
+		itr++)
+        {
+            if (!itr->second)
+            {
+                continue;
+            }
+
+            string sInterval = itr->second->getInterval();
+            int interval;
+            try
+            {
+                interval = boost::lexical_cast<int>(sInterval);
+            }
+            catch (boost::bad_lexical_cast& e)
+            {
+                continue;
+            }
+
+            double timeinterval = interval/1000;
+            LOG_INFO << "start timer :" << timeinterval;
+            //TimerId id = loop_->runEvery(timeinterval,
+            //    boost::bind(&SerialPort::onQueryDataTimer, this, *itr1));
+            //timers_.insert(make_pair<int, TimerId>(*itr1, id));
+            string monitorUnitKeyName(itr->second->getProtocolName());
+            monitorUnitKeyName += itr->second->getMac();
+
+            TimerId id = loop_->runEvery(timeinterval,
+                boost::bind(&SerialPort::onQueryDataTimer, this,
+                monitorUnitKeyName));
+        }
+       
        
     }
 

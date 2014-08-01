@@ -48,6 +48,8 @@ namespace detail
 		list<string> ret;
 		string currentpath = getFullPath();
 
+                currentpath += "../lib/";
+
 		DIR *dp;
 		struct dirent *entry;
 		struct stat statbuf;
@@ -110,6 +112,7 @@ CodecFactory::CodecFactory()
 {
 	list<string> libs = dbdky::detail::getCodecLibraries();
 	string abspath = dbdky::detail::getFullPath();
+        abspath += "../lib/";
 
 	if (libs.empty() || (abspath.empty()))
 	{

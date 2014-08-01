@@ -260,7 +260,7 @@ namespace gcc
        CRCOut[1] = ( unsigned char )( uCRC );
 
        //printf("CRC = %02X %02X\n",CRCOut[0],CRCOut[1]);
-       if(  £¡£¨ ( CRCOut[0] == buffer[19] ) && ( CRCOut[1] == buffer[20] ) £© )
+       if(!(( CRCOut[0] == buffer[19] ) && ( CRCOut[1] == buffer[20] )))
       {
            return PARSE_ERROR_OTHER;
        }

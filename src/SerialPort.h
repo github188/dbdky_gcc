@@ -96,12 +96,17 @@ private:
 
     //TimerId queryDataTimer_;
     //uint16_t queryInterval_;
+#if 0
     void onQueryDataTimer(int);
+#else
+    void onQueryDataTimer(string);
+#endif
     bool started_;
     //pdu::ProtocolType pType_;
 
     map<string, boost::shared_ptr<MonitorUnit> > monitorUnitList_;
     mutable MutexLock processMutex_;
+    mutable MutexLock timerHandleMutex_;
     Condition processPending_;
     mutable MutexLock mutex_;
     CodecBase* codec_;

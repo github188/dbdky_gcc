@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="gbk" ?>
+<package>
+   <RS485 name="RS485A" desc="RS485串行总线">
+    <PortName>/dev/ttyS0</PortName>
+    <BaudRate>9600</BaudRate>
+    <DataBits>8</DataBits>
+    <StopBits>1</StopBits>
+    <Parity>0</Parity>
+    <TotalTimeOut>50000</TotalTimeOut>
+    <IntervalTimeOut>200</IntervalTimeOut>
+    <InBufferSize>1024</InBufferSize>
+    <OutBufferSize>1024</OutBufferSize>
+  </RS485>
+<MonitorUnit name="MU1" interval="5000" protocolname="ZSAR" port="RS485A" manufacturer="neri" cycleid="" mac="2" ytime="1" wdtId="">
+     <MeasurePoint IEDName="NEPRI_CMD" deviceid="MOA0001" id="ZSAR1" checktime="">
+  		  <param name="SmpTm" />
+  		  <param name="TotA" /> 	
+  		  <param name="RisA" />
+  		  <param name="OpCnt" />
+  		  <param name="LastOpTm" />  
+   	  </MeasurePoint>
+  </MonitorUnit>
+</package>
