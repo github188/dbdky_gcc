@@ -299,7 +299,7 @@ namespace gcc
        char smpTm[64];
        smpTm64 = mktime(&tmp);
      
-        //smpTm64 += ( 8 * 60 * 60 );
+       smpTm64 += ( 8 * 60 * 60 );
    
        sprintf(smpTm,"%d",(int)smpTm64);
        
@@ -346,7 +346,8 @@ namespace gcc
            
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
        strcpy(pInsertRecord->lnInstArray[0] ,lnInst_.c_str());
-       strcpy(pInsertRecord->repID,"COMDATA/DATASET");
+       strcpy(pInsertRecord->repID,"COMDATA/");
+       strcat(pInsertRecord->repID,lnInst_.c_str());
 
        pInsertRecord->lnIDArraySize = 1;
        pInsertRecord->paramSize = 2;

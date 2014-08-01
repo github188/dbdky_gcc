@@ -24,6 +24,22 @@ public:
 
 	void insertMeasurePoint(string deviceid, string IEDName, string id, string checktime="");
 	MeasurePoint* getMeasurePointByDeviceid(string deviceid);
+        
+        //Added by Chen Hongquan, begin
+        //Here comes a very ugly interface.
+        //This interface is implemented based on the assumption that there
+        //is only ONE measure point in a MonitorUnit.
+        MeasurePoint* getFirstMeasurePoint()
+        {
+            if (measurePointList_.empty())
+            {
+                return NULL;
+            }
+
+            return measurePointList_.begin()->second.get();
+     
+        }
+        //Added by Chen Hongquan ,end
 
 	void dumpInfo() const;
 

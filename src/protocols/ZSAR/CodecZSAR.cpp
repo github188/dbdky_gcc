@@ -288,9 +288,9 @@ namespace gcc
        time_t smpTm64 = 0;
        char strSmpTm[32] = {0};
        smpTm64 = mktime(&tmp);
-        
+       smpTm64 += ( 8 * 60 * 60 );
        sprintf(strSmpTm,"%d",(int)smpTm64);
-       //_ltoa(smpTm64,smpTm,10);
+       
 
        //(1)TotA : -----------------------------
        unsigned char totaData = data[nPDUIndex++];
@@ -385,6 +385,9 @@ namespace gcc
        
        DB_INSERT_DATATYPE *pInsertRecord = (struct DB_INSERT_DATATYPE *) out; 
        strcpy(pInsertRecord->lnInstArray[ 0 ] ,lnInst_.c_str());
+       
+       strcpy(pInsertRecord->repID,"COMDATA/");
+       strcat(pInsertRecord->repID,lnInst_.c_str());
 
        pInsertRecord->lnIDArraySize = 1;
        pInsertRecord->paramSize = 5;

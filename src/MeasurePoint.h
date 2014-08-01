@@ -33,7 +33,11 @@ public:
 	{
 		return paramList_;
 	}
-	
+
+        string getId() const
+        {
+            return id_;
+        }	
 private:
 	string deviceid_;
 	string IEDName_;

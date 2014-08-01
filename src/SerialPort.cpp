@@ -354,8 +354,16 @@ void SerialPort::onQueryDataTimer(int interval)
         }
 
         map<string, float> paraPair = (*itr)->getParamConfigList();
-        codec_->setConfig((*itr)->getName(), paraPair);
+        
+       // codec_->setConfig((*itr)->getName(), paraPair);
+        MeasurePoint* mp = (*itr)->getFirstMeasurePoint();
+        if (NULL == mp)
+        {
+            LOG_ERROR << "No measure point under this monitor unit.";
+            continue;
+        }
 
+        codec_->setConfig(mp->getId(), paraPair);
         unsigned char codedata[14];
         int len = 14;
         int mac;
