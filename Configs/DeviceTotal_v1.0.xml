@@ -211,6 +211,30 @@
      	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
     </MeasurePoint>  	
   </Device>
+      <Device name="铁芯接地电流测量" desc="7号" id="GC0007" type="SPTR">
+  	<MeasurePoint name="MMXN7" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+      <Device name="铁芯接地电流测量" desc="9号" id="GC0008" type="SPTR">
+  	<MeasurePoint name="MMXN8" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+      <Device name="铁芯接地电流测量" desc="9号" id="GC0009" type="SPTR">
+  	<MeasurePoint name="MMXN9" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
+      <Device name="铁芯接地电流测量" desc="10号" id="GC0010" type="SPTR">
+  	<MeasurePoint name="MMXN10" desc="铁芯接地电流测量" type="CP">
+  		  <param name="SmpTm" desc="实时数据时间" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
+     	  <param name="Amp" desc="电流" unit="" precision="0.1" range="" filter="" addresslen="" address="" registernum="" /> 
+    </MeasurePoint>  	
+  </Device>
   <Device name="电流互感器" desc="1号主电流互感器" id="CT0001" type="CT">
   	<MeasurePoint name="cp1" desc="容性设备的绝缘测量"  type="CP">
   		  <param name="C" desc="绝缘介质电容量" unit="" precision="" range="" filter="" addresslen="" address="" registernum="" />
