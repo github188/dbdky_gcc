@@ -252,6 +252,18 @@ namespace gcc
        {
            return PARSE_ERROR_LENGTH_SHORT;
        }
+       
+       unsigned short uCRC;
+       unsigned char CRCOut[2];
+       uCRC = CRC16( (unsigned char*)buffer, 19 );     
+       CRCOut[0] = ( unsigned char )( uCRC >> 8);
+       CRCOut[1] = ( unsigned char )( uCRC );
+
+       //printf("CRC = %02X %02X\n",CRCOut[0],CRCOut[1]);
+       if(  £¡£¨ ( CRCOut[0] == buffer[19] ) && ( CRCOut[1] == buffer[20] ) £© )
+      {
+           return PARSE_ERROR_OTHER;
+       }
        //Merge from Yandan, end
 
        pRECMMXN pRs485Data;

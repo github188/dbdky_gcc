@@ -240,6 +240,18 @@ namespace gcc
        if (len < 25)
        {
            return PARSE_ERROR_LENGTH_SHORT;
+       }       
+              //CRC Check 
+       unsigned short uCRC;
+       unsigned char CRCOut[2];
+       uCRC = CRC16( (unsigned char*)buffer, 23 );     
+       CRCOut[0] = ( unsigned char )( uCRC >> 8);
+       CRCOut[1] = ( unsigned char )( uCRC );
+      // printf("CRC = %02X %02X\n",CRCOut[0],CRCOut[1]);
+
+       if(  £¡£¨ ( CRCOut[0] == buffer[23] ) && ( CRCOut[1] == buffer[24] ) £© )
+       {
+           return PARSE_ERROR_OTHER;
        }
        //Merge from Yandan, end
        
